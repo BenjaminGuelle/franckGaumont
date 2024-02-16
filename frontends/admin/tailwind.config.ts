@@ -1,4 +1,4 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 const config = {
   darkMode: ["class"],
@@ -10,49 +10,77 @@ const config = {
 	],
   prefix: "",
   theme: {
-    container: {
-      center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
+    fontFamily: {
+      montserrat: ["Montserrat", "sans-serif"],
+    },
+    fontSize: {
+      xs: '0.75rem', // 12
+      sm: '0.875rem', // 14
+      md: '0.9375rem', // 15
+      base: '1rem', // 16
+      xl: '1.25rem', // 20
+      '2xl': '1.5rem', // 24
+      '3xl': '1.75rem', // 28
+      '4xl': '2.1875rem', // 35
+      '5xl': '2.875rem', // 46
+    },
+    colors: {
+      primary: '#000000',
+      secondary: {
+        100: '#D9484A',
+        DEFAULT: '#BA181B',
+        300: '#A31518',
+        400: '#65160E',
       },
+      accent: {
+        DEFAULT: '#FFEA2C',
+        200: '#DFCD27',
+      },
+      grey: {
+        100: '#E5E9EE',
+        DEFAULT: '#B9B8B8',
+        300: '#C7C7C7',
+        400: '#C1C1C1',
+      },
+      white: '#FFFFFF',
+      blue: '#03091F',
     },
     extend: {
-      colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
-      },
+      // colors: {
+      //   border: "hsl(var(--border))",
+      //   input: "hsl(var(--input))",
+      //   ring: "hsl(var(--ring))",
+      //   background: "hsl(var(--background))",
+      //   foreground: "hsl(var(--foreground))",
+      //   primary: {
+      //     DEFAULT: "hsl(var(--primary))",
+      //     foreground: "hsl(var(--primary-foreground))",
+      //   },
+      //   secondary: {
+      //     DEFAULT: "hsl(var(--secondary))",
+      //     foreground: "hsl(var(--secondary-foreground))",
+      //   },
+      //   destructive: {
+      //     DEFAULT: "hsl(var(--destructive))",
+      //     foreground: "hsl(var(--destructive-foreground))",
+      //   },
+      //   muted: {
+      //     DEFAULT: "hsl(var(--muted))",
+      //     foreground: "hsl(var(--muted-foreground))",
+      //   },
+      //   accent: {
+      //     DEFAULT: "hsl(var(--accent))",
+      //     foreground: "hsl(var(--accent-foreground))",
+      //   },
+      //   popover: {
+      //     DEFAULT: "hsl(var(--popover))",
+      //     foreground: "hsl(var(--popover-foreground))",
+      //   },
+      //   card: {
+      //     DEFAULT: "hsl(var(--card))",
+      //     foreground: "hsl(var(--card-foreground))",
+      //   },
+      // },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",

@@ -1,10 +1,10 @@
 import { Typography } from '@/components/ui/typography';
 
-export default function Home() {
+export default function Services() {
 
   return (
     <main className={'bg-accent w-full h-full'}>
-      <Typography>Home</Typography>
+      <Typography>Services</Typography>
     </main>
   );
 }
