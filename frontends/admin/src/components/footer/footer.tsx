@@ -4,20 +4,21 @@ import { Logo } from '@/components/ui/logo';
 import { Typography } from '@/components/ui/typography';
 import { LinkModel, LinksModel, groupLinks } from '@/components/footer/footer.data';
 import Link from 'next/link';
-import { RiMapPinLine } from 'react-icons/ri';
 
 export const Footer = () => {
   return (
     <footer
       style={{
-      backgroundImage: `url(${bg.src})`,
-    }}
+        backgroundImage: `url(${bg.src})`,
+        backgroundPosition: 'right',
+        backgroundSize: 'cover',
+      }}
       className={'content-center'}
     >
       <Container className={'flex flex-col md:flex-row justify-between'}>
         <div className={'hidden md:flex items-center'}>
           <div className={'pt-6'}>
-            <Logo />
+            <Logo/>
           </div>
           <div>
             <Typography weight={'semibold'} theme={'white'}>EIRL Franck Gaumont</Typography>
@@ -41,24 +42,24 @@ export const Footer = () => {
                   {group.links.map((link: LinkModel, index: number) => {
                     return (
                       <li key={index}>
-                        <FooterLink label={link.label} link={link.link} />
+                        <FooterLink label={link.label} link={link.link}/>
                       </li>
-                    )
+                    );
                   })}
                 </ul>
-              )
+              );
             })
           }
         </div>
       </Container>
     </footer>
-  )
-}
+  );
+};
 
 const FooterLink: (link: LinkModel) => JSX.Element = (link: LinkModel) => {
   return (
     <Link href={link.link}>
-      <Typography theme={'white'} weight={'light'} className={'underline'}>{link.label}</Typography>
+      <Typography theme={'white'} className={'underline'}>{link.label}</Typography>
     </Link>
-  )
-}
+  );
+};

@@ -22,6 +22,8 @@ export const Header = () => {
       <div className={'relative z-50'}>
         <div className={'h-16 bg-primary'} style={{
           backgroundImage: `url(${bg.src})`,
+          backgroundPosition: 'left',
+          backgroundSize: 'cover',
         }}>
           <Container className={'py-0 h-full '}>
             <div className={'h-full flex justify-end items-center space-x-10'}>
@@ -34,7 +36,7 @@ export const Header = () => {
 
         <nav className={'h-12 bg-gradient-to-r from-secondary-100 via-secondary to-secondary-300'}>
           <Container className={'py-0 flex h-12 justify-end relative'}>
-            <div className={'absolute -top-8 left-0'}>
+            <div className={'absolute -top-8 left-5'}>
               <Link href={'/'}>
                 <Logo size={'large'}/>
               </Link>

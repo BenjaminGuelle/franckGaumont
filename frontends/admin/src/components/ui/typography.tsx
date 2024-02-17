@@ -15,46 +15,42 @@ interface Props {
 }
 
 export const Typography = ({
-   variant = 'p',
+   variant = 'base',
    theme = 'primary',
-   weight = 'regular',
+   weight = 'normal',
    comp: Component = 'p',
    className,
    children,
  }: Props) => {
 
-  let variantStyles: string = 'font-montserrat';
+  let variantStyles: string = 'font-montserrat tracking-tight';
   switch (variant) {
-    case 'p':
-    case 'base':
-      variantStyles = `${variantStyles} text-md`;
+    case 'base':  // DEFAULT
+      variantStyles = `${variantStyles} text-md md:text-base leading-7`;
       break;
     case 'lead':
-      variantStyles = `${variantStyles} text-sm`;
-      break;
-    case 'span':
-      variantStyles = `${variantStyles} `;
+      variantStyles = `${variantStyles} text-md leading-7`;
       break;
     case 't-1':
-      variantStyles = `${variantStyles} text-xl`;
+      variantStyles = `${variantStyles} text-xl leading-7`;
       break;
     case 't-2':
-      variantStyles = `${variantStyles} text-2xl`;
+      variantStyles = `${variantStyles} text-xl md:text-2xl leading-7`;
       break;
     case 't-3':
-      variantStyles = `${variantStyles} text-3xl`;
+      variantStyles = `${variantStyles} text-3xl leading-7`;
       break;
     case 't-4':
-      variantStyles = `${variantStyles} text-4xl uppercase`;
+      variantStyles = `${variantStyles} text-3xl lg:text-4xl uppercase leading-7`;
       break;
     case 't-5':
-      variantStyles = `${variantStyles} text-5xl uppercase`;
+      variantStyles = `${variantStyles} text-3xl md:text-4xl lg:text-5xl leading-7`;
       break;
   }
 
   let colorStyles: string = '';
   switch (theme) {
-    case 'primary':
+    case 'primary': // DEFAULT
       colorStyles = 'text-primary';
       break;
     case 'secondary':
@@ -76,11 +72,11 @@ export const Typography = ({
     case 'light':
       weightStyles = 'font-light';
       break;
+    case 'normal': // DEFAULT
+      weightStyles = 'font-normal';
+      break;
     case 'medium':
       weightStyles = 'font-medium';
-      break;
-    case 'regular':
-      weightStyles = 'font-regular';
       break;
     case 'semibold':
       weightStyles = 'font-semibold';

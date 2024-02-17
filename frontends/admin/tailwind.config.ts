@@ -14,15 +14,15 @@ const config = {
       montserrat: ["Montserrat", "sans-serif"],
     },
     fontSize: {
-      xs: '0.75rem', // 12
-      sm: '0.875rem', // 14
-      md: '0.9375rem', // 15
-      base: '1rem', // 16
-      xl: '1.25rem', // 20
-      '2xl': '1.5rem', // 24
-      '3xl': '1.75rem', // 28
-      '4xl': '2.1875rem', // 35
-      '5xl': '2.875rem', // 46
+      xs: '0.9996rem',
+      sm: '0.75rem',
+      md: '0.875rem',
+      base: '1rem',
+      xl: '1.25rem',
+      '2xl': '1.5rem',
+      '3xl': '1.75rem',
+      '4xl': '2.1875rem',
+      '5xl': '2.875rem',
     },
     colors: {
       primary: '#000000',
@@ -44,6 +44,9 @@ const config = {
       },
       white: '#FFFFFF',
       blue: '#03091F',
+    },
+    borderWidth: {
+      DEFAULT: '1px',
     },
     extend: {
       // colors: {

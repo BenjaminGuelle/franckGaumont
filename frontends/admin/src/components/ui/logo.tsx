@@ -1,29 +1,31 @@
 import { SizeType } from '@/types/ui/Size.type';
+import { cn } from '@/lib/utils';
 
 interface Props {
   size?: SizeType;
+  className?: string;
 }
 
-export const Logo: ({ size }: Props) => JSX.Element = ({size = 'medium'}: Props) => {
-  let sizeLogo: number;
+export const Logo: ({ size, className }: Props) => JSX.Element = ({size = 'medium', className}: Props) => {
+  let sizeStyles: string = '';
   switch (size) {
     case 'very-small':
-      sizeLogo = 68;
+      sizeStyles = 'w-[68px] h-[68px]';
       break;
     case 'small':
-      sizeLogo = 94;
+      sizeStyles = 'w-[94px] h-[94px]';
       break;
     case 'medium': // default
-      sizeLogo = 109;
+      sizeStyles = 'w-[109px] h-[109px]';
       break;
     case 'large':
-      sizeLogo = 157;
+      sizeStyles = 'w-[157px] h-[157px]';
       break;
   }
 
   return (
-    <div>
-      <svg width={sizeLogo} height={sizeLogo} viewBox="0 0 221 221" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div className={cn(sizeStyles, className)}>
+      <svg width={'100%'} height={'100%'} viewBox="0 0 221 221" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g filter="url(#filter0_d_351_167)">
           <rect x="16" y="3" width="157" height="157" fill="url(#pattern0)" shapeRendering="crispEdges"/>
         </g>
