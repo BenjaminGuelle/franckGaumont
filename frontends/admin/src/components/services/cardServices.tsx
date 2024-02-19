@@ -3,8 +3,8 @@ import bathroom from '@/public/images/bathroom.png';
 import plumbing from '@/public/images/plumbing.png';
 import repair from '@/public/images/repair.png';
 import { Typography } from '@/components/ui/typography';
-import { ActionLink } from '@/components/ui/actionLink';
 import Link from 'next/link';
+import { RiAddFill } from 'react-icons/ri';
 
 interface Props {
   services: ServicesModel;
@@ -51,7 +51,12 @@ export const CardServices = ({ services }: Props) => {
         <Typography className={'leading-6 md:py-10'}>
           {shortDescription}
         </Typography>
-        <ActionLink text={'Découvrir'} path={'/services'} className={'flex'}/>
+        <Typography comp={'div'} className={'inline-flex gap-2'}>
+          <p className={'text-sm font-semibold'}>Découvrir</p>
+          <div className={'rounded-full bg-accent text-primary p-2'}>
+            <RiAddFill/>
+          </div>
+        </Typography>
       </Link>
     </article>
   );
