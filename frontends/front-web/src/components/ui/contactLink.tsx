@@ -2,8 +2,8 @@ import React from 'react';
 import { RiFacebookCircleFill, RiInstagramLine, RiMailSendLine, RiMapPinLine, RiPhoneFill } from 'react-icons/ri';
 import { Typography } from '@/components/ui/typography';
 import { cn } from '@/lib/utils';
-import { ThemeType } from '@/types/ui/Theme.type';
 import { FontWeightType } from '@/types/ui/FontWeight.type';
+import { ThemeType } from '@/types/ui/Theme.type';
 
 interface Props {
   contactLink: ContactLink;

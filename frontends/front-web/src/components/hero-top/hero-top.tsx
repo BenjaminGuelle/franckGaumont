@@ -5,16 +5,16 @@ import { Typography } from '@/components/ui/typography';
 import { Button } from '@/components/ui/button';
 import bg from '@/public/images/BG-Header.png';
 import franck from '@/public/images/franck.png';
-import Image from 'next/image'
-import { useRouter } from 'next/navigation';
 import React, { useCallback } from 'react';
-import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import { ContactMe } from '@/components/ui/contactMe';
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 export const HeroTop = () => {
   const router: AppRouterInstance = useRouter();
 
-  const navigateTo: (path: string) => void = useCallback((path: string) => router.push(path), []);
+  const navigateTo: (path: string) => void = useCallback((path: string) => router.push(path), [router]);
 
   return (
     <section style={{
@@ -38,7 +38,7 @@ export const HeroTop = () => {
           </div>
         </div>
         <div className={'hidden lg:flex absolute right-0 w-auto bottom-0'}>
-          <Image className={'z-10'} src={franck} alt={'franck gaumont'}/>
+          <Image className={'z-10'} src={franck} alt={'franck gaumont'} />
         </div>
       </Container>
     </section>

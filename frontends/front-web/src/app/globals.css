@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer body{
+    font-family: 'Montserrat', 'sans-serif';
+}
+
+.serviceTitle::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    width: 3rem;
+    height: 0.375rem;
+    background-color: theme('colors.secondary.DEFAULT');
+}
+
+.serviceCard {
+    cursor: pointer;
+    border-width: 1px;
+    border-color: theme('colors.white');
+    transition: border-color 300ms ease-in;
+}
+
+.serviceCard:hover {
+    border-color: theme('colors.accent.DEFAULT');
+    transition: border-color 300ms ease-in;
+}
+
+@media (min-width: 768px) {
+    .serviceTitle::after {
+        left: 0;
+    }
+}
