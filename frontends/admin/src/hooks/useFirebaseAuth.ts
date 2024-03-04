@@ -3,7 +3,7 @@ import { onAuthStateChanged, User } from 'firebase/auth';
 import { auth } from '@/config/firebase.config';
 import { docRef } from '@/api/firebase.service';
 import { onSnapshot, Timestamp } from '@firebase/firestore';
-import { getUserDoc } from '@/api/users/users.services';
+import {useRouter} from 'next/navigation';
 
 export interface UserInterface {
   uid: string;
@@ -33,6 +33,7 @@ export interface UserDocument {
 export default function useFirebaseAuth() {
   const [authUser, setAuthUser] = useState<UserInterface | null>(null);
   const [authUserIsLoading, setAuthUserIsLoading] = useState(true);
+  const router = useRouter();
 
   const formatAuthUser: (user: User) => UserInterface = (user: User) => ({
     uid: user.uid,
@@ -42,42 +43,33 @@ export default function useFirebaseAuth() {
     phoneNumber: user.phoneNumber,
   } as UserInterface);
 
-  // const getUserDoc = async (user: UserInterface): Promise<void> => {
-  //   if (auth.currentUser) {
-  //     const compactUser: UserInterface = user;
-  //     const ref = docRef('users', auth.currentUser.uid);
-  //     onSnapshot(ref, async (doc) => {
-  //       if (doc.exists()) {
-  //         compactUser.userDocument = doc.data() as UserDocument;
-  //       }
-  //       setAuthUser((prevState) => ({
-  //         ...prevState,
-  //         ...compactUser,
-  //       }))
-  //       setAuthUserIsLoading(false);
-  //     });
-  //   }
-  // }
-
-  const onSnap = async (formattedUser: UserInterface) => {
-    const compactUser = getUserDoc(formattedUser);
-    console.log('compact', compactUser);
-    setAuthUser((prevState) => ({
-      ...prevState,
-      ...compactUser,
-    }));
-    setAuthUserIsLoading(false);
-  };
+  const getUserDoc = async (user: UserInterface): Promise<void> => {
+    if (auth.currentUser) {
+      const compactUser: UserInterface = user;
+      const ref = docRef('users', auth.currentUser.uid);
+      onSnapshot(ref, async (doc) => {
+        if (doc.exists()) {
+          compactUser.userDocument = doc.data() as UserDocument;
+        }
+        setAuthUser((prevState) => ({
+          ...prevState,
+          ...compactUser,
+        }))
+        setAuthUserIsLoading(false);
+      });
+    }
+  }
 
   const authStateChanged = async (authState: User | null): Promise<void> => {
     if (!authState) {
       setAuthUser(null);
       setAuthUserIsLoading(false);
+      router.replace('/connexion');
       return;
     }
     setAuthUserIsLoading(true);
     const formattedUser: UserInterface = formatAuthUser(authState);
-    await onSnap(formattedUser);
+    await getUserDoc(formattedUser);
   };
 
   useEffect(() => {

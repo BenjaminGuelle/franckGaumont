@@ -1,0 +1,1 @@
+export type FontWeightType = 'normal' | 'semibold' | 'extrabold' | 'light' | 'medium';
