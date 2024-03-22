@@ -1,0 +1,23 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    match /PUBLICATIONS_MEDIA {
+      allow read: if true;
+    }
+
+    match /PUBLICATIONS_MEDIA {
+      allow write: if true;
+    }
+
+    match /PUBLICATIONS_MEDIA/{document=**} {
+      allow read, write: if true;
+    }
+
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+
+  }
+}

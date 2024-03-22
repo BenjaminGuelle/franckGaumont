@@ -3,6 +3,8 @@ import Firestore = admin.firestore.Firestore;
 import { firestore } from 'firebase-admin';
 import DocumentReference = firestore.DocumentReference;
 import CollectionReference = firestore.CollectionReference;
+import DocumentData = firestore.DocumentData;
+import { ListOfCollections } from '../../shared/functionsMapp/ListOfCollections';
 
 export interface DataManagerConfig {
   db: Firestore;
@@ -58,4 +60,10 @@ export class DataManager<T> {
       throw new Error('Data Manager must contains docUid, collection Name and ref');
     }
   }
+
+  getCollectionRef(collectionName: ListOfCollections): CollectionReference<DocumentData> {
+    return this.db.collection(collectionName);
+  }
+
+
 }

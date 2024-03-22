@@ -22,13 +22,13 @@ export async function signInUser(request: SignInUserRequest) {
 
   try {
     const { user }: UserCredential = await signInWithEmailAndPassword(auth, email, password);
+    toast({
+      title: `user bien connecté`,
+      description: 'OKEY',
+    })
     return user;
   } catch (e) {
-    const error = e as FirebaseError;
-    toast({
-      title: error.code,
-      description: error.message,
-    })
+    return e as FirebaseError;
   }
 }
 

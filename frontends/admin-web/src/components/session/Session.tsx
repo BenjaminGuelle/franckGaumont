@@ -11,7 +11,7 @@ export const Session = ({children}: Props) => {
   const router = useRouter();
   const {authUser, authUserIsLoading} = useFirebaseAuth();
   const path: string = usePathname();
-  const authRoute: boolean = path.startsWith('/connexion');
+  const authRoute: boolean = path?.startsWith('/connexion');
 
   if (!authRoute && !authUserIsLoading) {
     if (authUser) {

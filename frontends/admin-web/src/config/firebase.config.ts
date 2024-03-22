@@ -2,6 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, connectAuthEmulator } from 'firebase/auth';
 import { connectFunctionsEmulator, getFunctions } from 'firebase/functions';
 import { connectFirestoreEmulator, getFirestore } from 'firebase/firestore';
+import { getStorage, connectStorageEmulator } from '@firebase/storage';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyByNVv69cZ6RvVt5UvksLYsQ82Usji2E48',
@@ -18,10 +19,12 @@ export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const functions = getFunctions(app, 'europe-west3');
 export const firestore = getFirestore(app);
+export const storage = getStorage(app);
 
 let isConnectedToAuthEmulator = false;
 let isConnectedToFunctionsEmulator = false;
 let isConnectedToFirestoreEmulator = false;
+let isConnectedToStorageEmulator = false;
 
 const CURRENT_ENV = 'LOCAL';
 
@@ -38,4 +41,9 @@ if (CURRENT_ENV === 'LOCAL' && !isConnectedToFunctionsEmulator) {
 if (CURRENT_ENV === 'LOCAL' && !isConnectedToFirestoreEmulator) {
   isConnectedToFirestoreEmulator = true;
   connectFirestoreEmulator(firestore, 'localhost', 8080);
+}
+
+if (CURRENT_ENV === 'LOCAL' && !isConnectedToStorageEmulator) {
+  isConnectedToStorageEmulator = true;
+  connectStorageEmulator(storage, 'localhost', 5050);
 }

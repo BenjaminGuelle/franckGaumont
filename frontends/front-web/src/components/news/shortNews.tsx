@@ -18,7 +18,7 @@ export const ShortNews = ({}: Props) => {
       <Container className={'lg:pt-20 pb-40'}>
         <TitleSection title={'Les Réalisations'}/>
         <SubtitleSection
-          path={'/actualites'}
+          path={'/publications'}
           buttonText={'Voir toutes les réalisations'}
           text={'Vidéos exclusives et photos avant/après, ' +
             'suivez mes réalisations en direct des chantiers de plomberie, ' +

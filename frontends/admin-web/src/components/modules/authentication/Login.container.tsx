@@ -8,6 +8,9 @@ import { z } from 'zod';
 import { signInUser } from '@/services/auth.services';
 import { toast } from '@/components/ui/use-toast';
 import { useRouter } from 'next/navigation';
+import { useCallback, useState } from 'react';
+import { User } from 'firebase/auth';
+import { FirebaseError } from '@firebase/util';
 
 type FormValues = z.infer<typeof formSchema>;
 
@@ -22,6 +25,8 @@ const formSchema = z.object({
 
 export const LoginContainer = () => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const loginForm = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -31,34 +36,30 @@ export const LoginContainer = () => {
     }
   })
 
-  const [onSubmit, isLoading] = useLoader(async (values: z.infer<typeof formSchema>) => {
-    await signInUser(values);
-    toast({
-      title: `user bien connecté`,
-      description: 'OKEY',
-    })
-    router.push('/');
+  const [sub, loadin] = useLoader(async (values: z.infer<typeof formSchema>) => {
+    setIsLoading(true);
+    const user: User | FirebaseError = await signInUser(values);
+    setIsLoading(false);
+    if (user instanceof FirebaseError) {
+      setError('Votre email ou mot de passe est incorrect')
+    }
+    else router.push('/');
   }, [])
 
   return (
-    <div className={'p-20 rounded-3xl'}>
-      <h2 className={'text-xl font-semibold'}>Veuillez vous connecter</h2>
-      <p className={'h-14 py-3 font-light text-red'}></p>
+    <div className={'p-8 rounded-2xl bg-white shadow-lg w-[368px] h-[402px] flex flex-col justify-between'}>
+      <h2 className={'text-xl font-medium border-b py-4 text-center'}>Veuillez vous connecter</h2>
       <Form {...loginForm}>
-        <form onSubmit={loginForm.handleSubmit(onSubmit)} className="space-y-8">
-          <div className={'flex gap-10 py-10'}>
+        <form onSubmit={loginForm.handleSubmit(sub)}>
+          <div className={'flex flex-col py-4 space-y-4'}>
             <FormField
               control={loginForm.control}
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Votre email</FormLabel>
                   <FormControl>
-                    <Input placeholder="Email" {...field} type={'email'}/>
+                    <Input placeholder="Email d'utilisateur" {...field} type={'email'} required={true}/>
                   </FormControl>
-                  <FormDescription>
-                    email de connexion
-                  </FormDescription>
                   <FormMessage/>
                 </FormItem>
               )}
@@ -68,24 +69,22 @@ export const LoginContainer = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Votre mot de passe</FormLabel>
                   <FormControl>
-                    <Input placeholder="Mot de passe" {...field} type={'password'}/>
+                    <Input placeholder="Mot de passe" {...field} type={'password'} required={true}/>
                   </FormControl>
-                  <FormDescription>
-                    * au moins 5 caractères
-                  </FormDescription>
-                  <FormDescription>
-                    * au moins 1 caractère spécial
-                  </FormDescription>
-                  <FormMessage/>
+                  <FormMessage>{error}</FormMessage>
                 </FormItem>
               )}
             />
           </div>
-          <Button type="submit" className={'text-white'}>{isLoading ? '...load' : 'Me connecter'}</Button>
         </form>
       </Form>
+      <p className={'flex justify-end text-sm text-primary hover:text-primary/50 cursor-pointer'}>Mot de passe oublié?</p>
+      <div className={'w-full flex justify-center'}>
+        <Button isLoading={isLoading} onClick={loginForm.handleSubmit(sub)}>
+          Se connecter
+        </Button>
+      </div>
     </div>
   )
 }

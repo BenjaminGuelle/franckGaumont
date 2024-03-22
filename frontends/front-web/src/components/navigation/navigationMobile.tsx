@@ -28,7 +28,7 @@ export const NavigationMobile = ({isActive, toggleMenu}: Props) => {
           <ActiveLink href={'/services'} pathname={pathname}>Services</ActiveLink>
         </li>
         <li onClick={toggleMenu} className={'py-5 border-b border-white/50'}>
-          <ActiveLink href={'/actualites'} pathname={pathname}>Actualités</ActiveLink>
+          <ActiveLink href={'/publications'} pathname={pathname}>Actualités</ActiveLink>
         </li>
         <li onClick={toggleMenu} className={'pb-10 pt-5 border-b border-white/50'}>
           <ActiveLink href={'/contact'} pathname={pathname}>Contact</ActiveLink>

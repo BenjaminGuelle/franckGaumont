@@ -1,0 +1,1 @@
+export type SizeType = 'very-small' | 'small' | 'medium' | 'large' | 'auto';

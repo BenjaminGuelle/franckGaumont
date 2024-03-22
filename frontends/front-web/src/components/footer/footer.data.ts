@@ -23,7 +23,7 @@ const linksPlan: LinkModel[] = [
   },
   {
     label: 'Actualités',
-    link: '/actualites',
+    link: '/publications',
   },
 ]
 

@@ -1,6 +1,7 @@
 import { Seo } from '@/components/Seo';
 import { Layout } from '@/components/layout/Layout';
-import { LandingPageContainer } from '@/components/modules/landingPage/LandingPageContainer';
+import { LandingPageContainer } from '@/components/modules/landingPage/LandingPage.container';
+import { Toaster } from '@/components/ui/toaster';
 
 export default function Home() {
   return (

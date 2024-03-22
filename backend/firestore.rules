@@ -11,13 +11,16 @@ function isOwner(userUid) {
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    match /users {
-      allow read, write: if isAuthenticate();
+    match /USERS {
+      allow read: if isAuthenticate();
     }
 
-    match /users/{userUid} {
-      allow read, write: if isOwner(userUid);
+    match /USERS/{userUid} {
+      allow read: if isOwner(userUid);
     }
 
+    match /PUBLICATIONS/{document=**} {
+      allow read: if true;
+    }
   }
 }

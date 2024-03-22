@@ -6,7 +6,7 @@ export const servicesData: ServicesModel[] = [
       'Que ce soit pour des réparations de robinets, de radiateurs, des installations d’adoucisseurs, de ballon d’eau chaude ou des urgences sur le réseau d’eau sanitaire, je réponds à vos besoins. \n' +
       'Je modèle le cuivre avec précision grâce au cintrage au sable. Mon expertise artisanale assure des formes impeccables pour des installations durables.\n' +
       '\n' +
-      'Contactez-moi pour un service fiable et rapide.',
+      'Contactez-moi pour un services fiable et rapide.',
     shortDescription: 'Réparations, installations, détections de fuites : mon expertise en plomberie garantit des interventions minutieuses pour un résultat durable.',
   },
   {

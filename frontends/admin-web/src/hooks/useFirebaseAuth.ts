@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { auth } from '@/config/firebase.config';
-import { onSnapshot, Timestamp } from '@firebase/firestore';
-import { docRef } from '@/services/firebase.service';
+import { Timestamp } from '@firebase/firestore';
+import { FirebaseWrapperClient} from '@/services/firebase.service';
+import { UserModel } from '@/shared/models/users/User.model';
 
 export interface UserInterface {
   uid: string;
@@ -44,17 +45,18 @@ export default function useFirebaseAuth() {
   const getUserDoc = async (user: UserInterface): Promise<void> => {
     if (auth.currentUser) {
       const compactUser: UserInterface = user;
-      const ref = docRef('users', auth.currentUser.uid);
-      onSnapshot(ref, async (doc) => {
-        if (doc.exists()) {
-          compactUser.userDocument = doc.data() as UserDocument;
+      const fbWrapper = new FirebaseWrapperClient;
+      const userRef = fbWrapper.getDocRef('USERS', auth.currentUser.uid);
+      fbWrapper.onSnapshotDoc<UserModel>(userRef, (data) => {
+        if (data) {
+          compactUser.userDocument = data as UserDocument;
+          setAuthUser((prevState) => ({
+            ...prevState,
+            ...compactUser,
+          }))
         }
-        setAuthUser((prevState) => ({
-          ...prevState,
-          ...compactUser,
-        }))
         setAuthUserIsLoading(false);
-      });
+      })
     }
   }
 

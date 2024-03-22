@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import logo from '@public/images/logo-franck-gaumont.png'
-import { SizeType } from '@/shared/types/Size.type';
+import { SizeType } from '@/types/Size.type';
 
 interface Props {
   size?: SizeType;
@@ -22,6 +22,9 @@ export const Logo: ({ size, className }: Props) => JSX.Element = ({size = 'mediu
       break;
     case 'large':
       sizeStyles = 'w-[157px] h-[157px]';
+      break;
+    case 'auto':
+      sizeStyles = 'w-[68px] h-[68px] md:w-[94px] md:h-[94px] lg:w-[109px] lg:h-[109px]';
       break;
   }
 

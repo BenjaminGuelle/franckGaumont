@@ -118,6 +118,7 @@ const FormControl = React.forwardRef<
       }
       aria-invalid={!!error}
       {...props}
+      className={'bg-grey-400 border-none px-4 h-12 text-black-400'}
     />
   )
 })
@@ -155,7 +156,7 @@ const FormMessage = React.forwardRef<
     <p
       ref={ref}
       id={formMessageId}
-      className={cn("text-[0.8rem] font-medium text-destructive", className)}
+      className={cn("text-[0.8rem] font-normal text-secondary", className)}
       {...props}
     >
       {body}
