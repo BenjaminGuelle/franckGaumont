@@ -1,12 +1,10 @@
 import { cn } from '@/lib/utils';
-import Image from 'next/image';
-import logoSpin from '@public/images/logoSpin.png';
 
 interface Props {
   size?: 'sm' | 'md' | 'lg' | 'xl';
   color?: 'primary' | 'black' | 'white' | 'light' | 'secondary';
   className?: string;
-  variant?:  "link" | "secondary" | "default" | "defaultLine" | "defaultOut" | "secondaryLine" | "secondaryOut" | "disable" | null;
+  variant?: 'link' | 'secondary' | 'default' | 'defaultLine' | 'defaultOut' | 'secondaryLine' | 'secondaryOut' | 'disable' | null;
 }
 
 export const Spin = ({ size = 'sm', color = 'primary', className, variant }: Props) => {
@@ -52,7 +50,6 @@ export const Spin = ({ size = 'sm', color = 'primary', className, variant }: Pro
       break;
   }
 
-  console.log('VARIANT', variant);
   switch (variant) {
     case 'defaultLine':
     case 'defaultOut':

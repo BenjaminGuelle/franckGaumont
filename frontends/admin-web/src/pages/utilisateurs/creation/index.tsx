@@ -6,7 +6,7 @@ export default function Create() {
     <>
       <Seo title={`Admin - création d'utilisateurs`} description={`page de création d'utilisateurs`} />
       <Layout>
-        <h1>Admin - création d'utilisateurs</h1>
+        <h1>Admin - création utilisateur</h1>
       </Layout>
     </>
   );

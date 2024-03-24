@@ -10,7 +10,7 @@ export default function CreatePublication() {
       <Seo title={'Admin - création publications'} description={`page de création d'une publication`} />
       <Layout>
         <div className={'p-4 lg:px-14 space-y-5'}>
-          <h1 className={'text-lg lg:text-xxl font-medium'}>Créé une publication</h1>
+          <h1 className={'text-base md:text-lg lg:text-xxl font-medium'}>Créé une publication</h1>
         </div>
         <PageBlock>
           <PublicationCreate/>

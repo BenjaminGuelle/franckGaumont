@@ -1,22 +1,15 @@
 rules_version = '2';
 
+function hasAuth() {
+  return request.auth != null;
+}
+
 service firebase.storage {
   match /b/{bucket}/o {
 
-    match /PUBLICATIONS_MEDIA {
+	match /PUBLICATIONS_MEDIA/{allPaths=**} {
       allow read: if true;
-    }
-
-    match /PUBLICATIONS_MEDIA {
-      allow write: if true;
-    }
-
-    match /PUBLICATIONS_MEDIA/{document=**} {
-      allow read, write: if true;
-    }
-
-    match /{allPaths=**} {
-      allow read, write: if false;
+      allow write: if hasAuth();
     }
 
   }

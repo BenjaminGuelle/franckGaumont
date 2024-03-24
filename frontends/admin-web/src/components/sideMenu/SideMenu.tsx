@@ -18,7 +18,7 @@ export const SideMenu = () => {
 
   return (
     <div
-      className={cn('absolute h-screen md:relative top-0 -left-64 w-64 bg-white pt-12 px-4 transform transition ease-in-out z-40', isMenuVisible ? '-translate-x-0' : 'translate-x-64')}>
+      className={cn('absolute h-screen md:relative top-0 -left-full md:left-0 w-full md:w-64 bg-white pt-12 px-4 transform transition ease-in-out z-40', isMenuVisible ? 'translate-x-full' : '-translate-x-0')}>
       <div className={'flex items-center pb-8'}>
         <div>
           <Logo size={'small'}/>
@@ -47,7 +47,7 @@ export const SideMenu = () => {
               }
             })}
             {authUser &&
-                <li className={'mx-auto'}>
+                <li className={'mx-auto'} onClick={toggleMenu}>
                     <Button onClick={disconnect}>
                         <RiLogoutCircleLine className={'w-6 h-6'}/>
                         <p>Se déconnecter</p>

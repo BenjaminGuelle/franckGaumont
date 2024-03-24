@@ -6,14 +6,14 @@ export function useLoader<T extends (...args: Parameters<T>) => ReturnType<T>>(c
   const reactCallback = useCallback(async (...args: Parameters<T>): Promise<ReturnType<T>> => {
     setIsLoading(true);
     try {
-      const returnValue: ReturnType<T> = await callback(...args);
+      const returnValue: ReturnType<T> = callback(...args);
       setIsLoading(false);
       return returnValue;
     } catch(e) {
       setIsLoading(false);
       throw e;
     }
-  }, [callback, ...deps]);
+  }, [callback]);
 
   return [reactCallback, isLoading];
 }

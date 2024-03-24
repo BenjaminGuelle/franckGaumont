@@ -4,3 +4,6 @@ export type ListOfCollections =
 
 export type ListOfSubCollection =
   | 'PHOTOS';
+
+export type ListOfFolders =
+  | 'PUBLICATIONS_MEDIA'

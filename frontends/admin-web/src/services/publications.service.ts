@@ -1,5 +1,5 @@
 import { CreatePublicationRequest } from '@/shared/requests/publications/CreatePublication.request';
-import { filesToUpload, FirebaseWrapperClient, StorageName } from '@/services/firebase.service';
+import { filesToUpload, FirebaseWrapperClient } from '@/services/firebase.service';
 import { toast } from '@/components/ui/use-toast';
 import { FirebaseError } from '@firebase/util';
 import { PublicationModel } from '@/shared/models/publication/Publication.model';
@@ -60,6 +60,22 @@ export async function deletePublication(publicationId: string): Promise<void> {
     toast({
       title: `Publication uid ${publicationId}`,
       description: 'La publication à bien été supprimée.',
+    });
+  } catch (e) {
+    const error = e as FirebaseError;
+    toast({
+      title: error.code,
+      description: error.message,
+    });
+  }
+}
+
+export async function deletePublicationFile(publicationId: string, fileId: string): Promise<void> {
+  try {
+    await db.onCall<'deletePublicationFile'>('PUBLICATIONS-delete_publication_file', {publicationId, fileId});
+    toast({
+      title: `Image uid ${fileId}`,
+      description: `L'image est bien supprimée`,
     });
   } catch (e) {
     const error = e as FirebaseError;

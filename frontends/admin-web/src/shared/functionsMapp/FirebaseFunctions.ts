@@ -4,6 +4,7 @@ import { CreatePublicationRequest } from '../requests/publications/CreatePublica
 import { PublicationModel } from '../models/publication/Publication.model';
 import { ConfirmationResponse } from '../responses/Confirmation.response';
 import { UpdatePublicationRequest } from '../requests/publications/UpdatePublication.request';
+import { DeletePublicationFileRequest } from '../requests/publications/DeletePublicationFile.request';
 
 export interface FirebaseFunctions {
   createUser: {
@@ -30,5 +31,10 @@ export interface FirebaseFunctions {
     functionName: 'PUBLICATIONS-update_publication';
     request: UpdatePublicationRequest;
     response: ConfirmationResponse;
-  }
+  },
+  deletePublicationFile: {
+    functionName: 'PUBLICATIONS-delete_publication_file';
+    request: DeletePublicationFileRequest;
+    response: ConfirmationResponse;
+  },
 }

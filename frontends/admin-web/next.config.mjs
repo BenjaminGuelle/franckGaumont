@@ -2,8 +2,10 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['localhost'],
+    unoptimized: true,
+    domains: ['firebasestorage.googleapis.com'],
   },
+  output: 'export',
 };
 
 export default nextConfig;

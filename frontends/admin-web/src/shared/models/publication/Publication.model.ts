@@ -11,6 +11,8 @@ export interface PublicationModel {
   category: CategoryModel;
   city: string;
 
+  isOnline: boolean;
+
   images?: PublicationPhotoModel[];
 }
 

@@ -60,18 +60,18 @@ export default function useFirebaseAuth() {
     }
   }
 
-  const authStateChanged = async (authState: User | null): Promise<void> => {
-    if (!authState) {
-      setAuthUser(null);
-      setAuthUserIsLoading(false);
-      return;
-    }
-    setAuthUserIsLoading(true);
-    const formattedUser: UserInterface = formatAuthUser(authState);
-    await getUserDoc(formattedUser);
-  };
-
   useEffect(() => {
+    const authStateChanged = async (authState: User | null): Promise<void> => {
+      if (!authState) {
+        setAuthUser(null);
+        setAuthUserIsLoading(false);
+        return;
+      }
+      setAuthUserIsLoading(true);
+      const formattedUser: UserInterface = formatAuthUser(authState);
+      await getUserDoc(formattedUser);
+    };
+
     const unsubscribe = onAuthStateChanged(auth, authStateChanged);
     return () => unsubscribe();
   }, []);

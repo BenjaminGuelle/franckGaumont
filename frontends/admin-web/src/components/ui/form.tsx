@@ -93,7 +93,7 @@ const FormLabel = React.forwardRef<
   return (
     <Label
       ref={ref}
-      className={cn(error && "text-destructive", className)}
+      className={cn(error && "text-base", className)}
       htmlFor={formItemId}
       {...props}
     />
@@ -118,7 +118,7 @@ const FormControl = React.forwardRef<
       }
       aria-invalid={!!error}
       {...props}
-      className={'bg-grey-400 border-none px-4 h-12 text-black-400'}
+      className={cn('bg-grey-400 border-none px-4 h-12 text-base text-black-400', props.className)}
     />
   )
 })

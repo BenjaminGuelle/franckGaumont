@@ -11,15 +11,19 @@ import CollectionReference = firestore.CollectionReference;
 import DocumentData = firestore.DocumentData;
 import DocumentSnapshot = firestore.DocumentSnapshot;
 import QuerySnapshot = firestore.QuerySnapshot;
-import { ListOfCollections, ListOfSubCollection } from '../../shared/functionsMapp/ListOfCollections';
+import { ListOfCollections, ListOfFolders, ListOfSubCollection } from '../../shared/functionsMapp/ListOfCollections';
 import DocumentReference = firestore.DocumentReference;
+import { Storage, getStorage } from 'firebase-admin/storage';
+import { Bucket, GetFilesResponse } from '@google-cloud/storage';
 
 export class FirestoreWrapper {
   public db: Firestore;
+  public storage: Storage
   collectionName: ListOfCollections;
 
   constructor() {
     this.db = getFirestore();
+    this.storage = getStorage();
   }
 
   async get<T>(collection: FirestoreWrapperCollection, docUid: string): Promise<null | T>;
@@ -124,6 +128,37 @@ export class FirestoreWrapper {
         createdDate: Timestamp.now(),
         updatedDate: Timestamp.now(),
       });
+    }
+
+    return { info: 'ok' };
+  }
+
+  async deleteWithSub(collection: FirestoreWrapperCollection, docUid: string, subCollectionName: ListOfSubCollection, subDocUid: string): Promise<{ info: 'ok' }>;
+  async deleteWithSub(collectionName: ListOfCollections, docUid: string, subCollectionName: ListOfSubCollection, subDocUid: string): Promise<{ info: 'ok' }>;
+  async deleteWithSub(root: FirestoreWrapperRoot, docUid: string, subCollectionName: ListOfSubCollection, subDocUid: string): Promise<{ info: 'ok' }> {
+    const ref: DocumentReference<DocumentData> = this.getCollectionReference(root)
+      .doc(docUid)
+      .collection(subCollectionName)
+      .doc(subDocUid);
+
+    await this.db.recursiveDelete(ref);
+
+    return { info: 'ok' };
+  }
+
+  async deleteFilesInStorage(folderName: ListOfFolders, subFolderId: string, fileId?: string) {
+    const bucket: Bucket = this.storage.bucket();
+    let path: string = `${folderName}/${subFolderId}`;
+
+    if (fileId) {
+      path = `${path}/${fileId}`;
+    }
+
+    const [files]: GetFilesResponse = await bucket.getFiles({prefix: path});
+
+    if (files.length > 0) {
+      const deletePromises: Promise<void>[] = files.map(file => file.delete().then(() => {}));
+      await Promise.all(deletePromises);
     }
 
     return { info: 'ok' };

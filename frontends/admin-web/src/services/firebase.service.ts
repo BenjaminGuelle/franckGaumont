@@ -7,24 +7,17 @@ import {
   DocumentReference,
   getDoc as getDOC, getDocs,
   onSnapshot,
-  query,
 } from '@firebase/firestore';
 import { FirebaseFunctions } from '@/shared/functionsMapp/FirebaseFunctions';
 import { ListOfCollections, ListOfSubCollection } from '@/shared/functionsMapp/ListOfCollections';
 import {
   StorageReference,
-  UploadTask,
   ref,
   uploadBytesResumable,
   listAll, UploadTaskSnapshot, getDownloadURL,
 } from '@firebase/storage';
 import { uuidv4 } from '@firebase/util';
 import { PublicationPhotoModel } from '@/shared/models/publication/PublicationPhoto.model';
-
-export interface ErrorSnapshot {
-  code: string,
-  message: string;
-}
 
 export type StorageName = 'PUBLICATIONS_MEDIA';
 
@@ -66,6 +59,11 @@ export class FirebaseWrapperClient {
   async getCollection<T>(collectionName: ListOfCollections): Promise<T[]> {
     const collectionSnapshot = this.getCollectionRef(collectionName);
     const querySnapshot = await getDocs(collectionSnapshot);
+    return querySnapshot.docs.map(doc => doc.data() as T);
+  }
+
+  async getSubCollection<T>(subColRef: CollectionReference) {
+    const querySnapshot = await getDocs(subColRef);
     return querySnapshot.docs.map(doc => doc.data() as T);
   }
 
@@ -165,4 +163,6 @@ export interface filesToUpload {
   file: File;
   uid?: string;
 }
+
+
 

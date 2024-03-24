@@ -8,7 +8,7 @@ export const GoBack = () => {
   return (
     <Button variant={'link'} onClick={() => router.back()} className={'px-0'}>
       <div className={'bg-primary p-2 rounded-full'}>
-        <RiArrowLeftLine className={'w-8 h-8 text-white'}/>
+        <RiArrowLeftLine className={'w-6 h-6 md:w-8 md:h-8 text-white'}/>
       </div>
       Retour
     </Button>

@@ -5,4 +5,5 @@ export interface CreatePublicationRequest {
   description: string;
   city: string;
   category: CategoryModel;
+  isOnline: boolean;
 }

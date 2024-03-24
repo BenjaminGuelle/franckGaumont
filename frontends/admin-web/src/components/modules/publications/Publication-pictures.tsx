@@ -1,87 +1,112 @@
-import { useLoader } from '@/hooks/useLoader';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { filesToUpload } from '@/services/firebase.service';
 import { PublicationModel } from '@/shared/models/publication/Publication.model';
 import { Button } from '@/components/ui/button';
 import { PublicationPhotoModel } from '@/shared/models/publication/PublicationPhoto.model';
-import { updatePublication, uploadFiles } from '@/services/publications.service';
+import { deletePublicationFile, updatePublication, uploadFiles } from '@/services/publications.service';
 import { UpdatePublicationRequest } from '@/shared/requests/publications/UpdatePublication.request';
-import { ImageUploadInput } from '@/components/modules/publications/ImageUploadInput';
-import { toast } from '@/components/ui/use-toast';
 import { RxUpdate } from 'react-icons/rx';
+import { PhotoCard } from '@/components/modules/publications/photo-card';
 
 interface Props {
   publication: PublicationModel;
   photos: PublicationPhotoModel[];
+  onPhotoUpdate: () => void;
 }
 
-export const PublicationPictures = ({publication, photos = []}: Props) => {
-  const {uid} = publication;
-  const [selectedFiles, setSelectedFiles] = useState<filesToUpload[]>([]);
-  const [previews, setPreviews] = useState<string[]>(photos.map(photo => photo.url));
+export interface ItemFile {
+  file?: File;
+  uid?: string;
+  preview?: string;
+  url?: string;
+}
 
-  const [handleImageUpload, uploadFilesLoading] = useLoader(async () => {
-    const validFiles = selectedFiles.filter(item => item && item.file);
+export const PublicationPictures = ({ publication, photos = [], onPhotoUpdate }: Props) => {
+  const { uid } = publication;
 
-    if (validFiles.length > 0) {
-      try {
-        const photosData: Partial<PublicationPhotoModel>[] = await uploadFiles(uid, validFiles);
-        const request: UpdatePublicationRequest = {
-          publicationUid: uid,
-          photos: photosData,
-        };
-        await updatePublication(request);
-      } catch (error) {
-        toast({
-          title: 'Modification des photos enregistrées',
-          description: `Erreur lors de l'ajou ou la modification d'images`,
-        });
-        console.error(error);
-      }
-    } else {
-      toast({
-        title: 'Modification des photos enregistrées',
-        description: `aucun fichier n'a été ajouté ou remplacé`,
-      });
-    }
-  }, []);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const handleFileSelect = (index: number) => (file: File) => {
-    const newSelectedFiles = [...selectedFiles];
-    newSelectedFiles[index] = { file, uid: photos[index]?.uid };
-    setSelectedFiles(newSelectedFiles);
+  const [deleteFileLoading, setDeleteFileLoading] = useState<string | null>(null);
 
+  const [data, _] = useState<PublicationPhotoModel[]>(photos);
+  const [itemFile, setItemFile] = useState<ItemFile[]>([]);
+
+  const handleFileSelect = (index: number) => async (file: File) => {
     const reader = new FileReader();
-    reader.onload = (e) => {
-      const newPreviews = [...previews];
-      let imgDataUrl: string | ArrayBuffer | null = null;
-      if (e.target) {
-        imgDataUrl = e.target.result;
-      }
-      newPreviews[index] = imgDataUrl as string;
-
-      setPreviews(newPreviews);
+    reader.onloadend = () => {
+      setItemFile(current =>
+        current.map((item, idx) =>
+          idx === index ?
+            { ...item, file, preview: reader.result as string, url: undefined } : item));
     };
     reader.readAsDataURL(file);
   };
 
+  const handleDeleteFile: (fileUid: string) => Promise<void> = useCallback(async (fileUid: string) => {
+    setDeleteFileLoading(fileUid);
+    await deletePublicationFile(uid, fileUid);
+    onPhotoUpdate();
+    setDeleteFileLoading(null);
+  }, [uid, onPhotoUpdate])
+
+  const handleImageUpload = async () => {
+    setIsLoading(true);
+    const validItems: ItemFile[] = itemFile.filter((item) => item && item.file);
+    if (validItems.length > 0) {
+      const imagesToUpload: filesToUpload[] = validItems.map((item) => ({uid: item.uid, file: item.file} as filesToUpload));
+      const imagesUploaded: Partial<PublicationPhotoModel>[] = await uploadFiles(uid, imagesToUpload);
+
+      const request: UpdatePublicationRequest = {
+        publicationUid: uid,
+        photos: imagesUploaded,
+      }
+
+      await updatePublication(request);
+      onPhotoUpdate();
+
+    }
+    setIsLoading(false);
+  };
+
+  const refresh: () => void = useCallback(() => {
+    const initialItemFiles: ItemFile[] = Array.from({ length: 4 }).map((_, index) => ({
+      uid: data[index]?.uid,
+      file: undefined,
+      preview: undefined,
+      url: data[index]?.url,
+    }));
+    setItemFile(initialItemFiles);
+  }, [data]);
+
   useEffect(() => {
-  }, [previews, selectedFiles]);
+    refresh()
+  }, [refresh]);
 
   return (
     <div className={'space-y-5'}>
-      <div className={'border-b border-b-primary-500'}>
-        <h3 className={'text-primary font-medium text-lg'}>Photos</h3>
+      <div className={'border-b border-b-primary-500 flex items-center justify-between py-4 md:py-0'}>
+        <h3 className={'text-primary font-medium md:text-lg'}>Photos</h3>
+        <Button type="button" size={'icon'} isLoading={isLoading} className={'pl-0 md:hidden'}
+                onClick={handleImageUpload}>
+          <div className={'bg-primary p-2 rounded-full'}>
+            <RxUpdate className={'w-6 h-6 text-white'}/>
+          </div>
+        </Button>
       </div>
       <div className={'flex flex-wrap gap-4 justify-center md:justify-normal'}>
-        <ImageUploadInput onFileSelect={handleFileSelect(0)} previewSrc={previews[0]}/>
-        <ImageUploadInput onFileSelect={handleFileSelect(1)} previewSrc={previews[1]}/>
-        <ImageUploadInput onFileSelect={handleFileSelect(2)} previewSrc={previews[2]}/>
-        <ImageUploadInput onFileSelect={handleFileSelect(3)} previewSrc={previews[3]}/>
+        {itemFile.map((item, index) =>
+          (<PhotoCard
+            key={index}
+            item={item}
+            onFileSelect={handleFileSelect(index)}
+            onDelete={(fileId: string) => handleDeleteFile(fileId)}
+            isLoading={deleteFileLoading === item.uid}
+          />))
+        }
       </div>
 
-      <div className={'flex justify-center lg:justify-normal'}>
-        <Button type="button" variant={'link'} isLoading={uploadFilesLoading} className={'pl-0'} onClick={handleImageUpload}>
+      <div className={'hidden md:flex justify-center lg:justify-normal'}>
+        <Button type="button" variant={'link'} isLoading={isLoading} className={'pl-0'} onClick={handleImageUpload}>
           <div className={'bg-primary p-2 rounded-full'}>
             <RxUpdate className={'w-6 h-6 text-white'}/>
           </div>

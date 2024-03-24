@@ -8,7 +8,7 @@ interface Props {
 
 export const Container: ({ children, className }: Props) => React.JSX.Element = ({children, className}: Props) => {
   return (
-    <div className={cn('p-4 bg-white rounded-lg shadow h-auto', className)}>
+    <div className={cn('p-4 bg-white rounded-lg shadow', className)}>
       {children}
     </div>
   )

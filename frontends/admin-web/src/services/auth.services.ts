@@ -34,7 +34,6 @@ export async function signInUser(request: SignInUserRequest) {
 
 export async function signOutUser(): Promise<ReturnErrorFB | ConfirmationResponse> {
   try {
-    console.log('AUTH', auth);
     await signOut(auth);
     toast({
       title: `utilisateur`,

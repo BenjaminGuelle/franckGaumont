@@ -39,7 +39,9 @@ export const Spinner = ({ size = 'sm' }: Props) => {
           d="M16.9497 7.05015C14.2161 4.31648 9.78392 4.31648 7.05025 7.05015C6.65973 7.44067 6.02656 7.44067 5.63604 7.05015C5.24551 6.65962 5.24551 6.02646 5.63604 5.63593C9.15076 2.12121 14.8492 2.12121 18.364 5.63593C18.7545 6.02646 18.7545 6.65962 18.364 7.05015C17.9734 7.44067 17.3403 7.44067 16.9497 7.05015Z">
         </path>
       </svg>
-      <Image priority={true} className={cn('absolute w-7 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2', withStyles)} src={logoSpin} alt={'logo loader'} />
+      <Image priority={true}
+             className={cn('absolute w-7 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2', withStyles)}
+             src={logoSpin} alt={'logo loader'}/>
     </div>
   )
     ;
