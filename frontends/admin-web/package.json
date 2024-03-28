@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "cp .env.dev .env && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "predeploy": "npm run build",
-    "deploy": "npm run predeploy && firebase deploy"
+    "deploy": "cp .env.dev .env && npm run predeploy && firebase deploy",
+    "deploy:prod": "cp .env.production .env && npm run predeploy && firebase deploy"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -20,11 +21,13 @@
     "@radix-ui/react-toast": "^1.1.5",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "draft-js": "^0.11.7",
     "firebase": "^10.8.0",
     "firebase-admin": "^11.11.1",
     "next": "14.1.1",
     "react": "^18",
     "react-dom": "^18",
+    "react-draft-wysiwyg": "^1.15.0",
     "react-hook-form": "^7.51.0",
     "react-icons": "^5.0.1",
     "sharp": "^0.33.3",
@@ -37,6 +40,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-draft-wysiwyg": "^1.13.8",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.1.1",
