@@ -3,10 +3,12 @@
 import { TitleSection } from '@/components/ui/titleSection';
 import { SubtitleSection } from '@/components/ui/subtitleSection';
 import { Container } from '@/components/ui/container';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import { PublicationModel } from '@/shared/models/publication/Publication.model';
 import { useMemo } from 'react';
 import Image from 'next/image';
+import { GiPositionMarker } from 'react-icons/gi';
+import { ActionLink } from '@/components/ui/actionLink';
 
 interface Props {
   publications: PublicationModel[];
@@ -17,7 +19,6 @@ export const ShortNews = ({publications}: Props) => {
   const activePublications: PublicationModel[] = useMemo(() => {
     const filteredPublications: PublicationModel[] = publications.filter(pub => pub.isOnline);
 
-    console.log(filteredPublications)
     return filteredPublications.slice(0, 3);
   }, [publications]);
 
@@ -33,24 +34,31 @@ export const ShortNews = ({publications}: Props) => {
             'd’aménagement ou de dépannage en vous abonnnant à mon compte Instagram :'}
         />
 
-        <div className={'bg-accent flex min-h-[350px] w-full justify-center p-10 items-center'}>
+        <div className={'flex min-h-[350px] w-full justify-center py-10 items-center'}>
           <Carousel className="w-full">
             <CarouselContent className={'gap-x-0'}>
               {activePublications.map((news) => {
                 return (
-                  <CarouselItem key={news.uid} className={'md:basis-1/2 h-full lg:basis-1/3'}>
-                    <div className={'h-full bg-secondary'}>
-                      {news.photos && <Image width={200} height={200} src={news.photos[0].url} alt={'photo'}/>}
-                      <p>{news.title}</p>
-                      <p>{news.description}</p>
-                      <p>{news.city}</p>
+                  <CarouselItem key={news.uid} className={'md:basis-1/2 lg:basis-1/3'}>
+                    <div>
+                      <div className={'w-full aspect-square relative'}>
+                        {news.photos &&
+                            <Image priority={true} fill={true} src={news.photos[0].url} alt={'photo'} className={'object-cover'}/>}
+                      </div>
+                      <div className="py-4 h-[11rem] flex flex-col">
+                        <h3 className="text-xl font-bold">{news.title}</h3>
+                        <p className="text-lg text-grey-300 italic flex items-center py-2">
+                          <GiPositionMarker className={'text-grey-300 text-lg'} />
+                          {news.city}
+                        </p>
+                        <p className="line-clamp-3 overflow-hidden text-ellipsis">{news.description}</p>
+                      </div>
+                      <ActionLink path={'/'} text={'Voir la réalisation'} className={'flex'}/>
                     </div>
                   </CarouselItem>
                 )
               })}
             </CarouselContent>
-            {/*<CarouselPrevious />*/}
-            {/*<CarouselNext />*/}
           </Carousel>
         </div>
 

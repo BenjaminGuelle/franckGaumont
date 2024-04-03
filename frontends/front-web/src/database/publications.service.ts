@@ -42,7 +42,7 @@ function serializeForClient(pub: PublicationModel) {
     ...pub,
     creationDate: convertFakeTimeStampToNumber(pub.creationDate),
     updatedDate: pub.updatedDate ? convertFakeTimeStampToNumber(pub.updatedDate) : undefined,
-    images: pub.photos?.map(img => ({
+    photos: pub.photos?.map(img => ({
       ...img,
       creationDate: convertFakeTimeStampToNumber(img.creationDate),
       updatedDate: img.updatedDate ? convertFakeTimeStampToNumber(img.updatedDate) : undefined,

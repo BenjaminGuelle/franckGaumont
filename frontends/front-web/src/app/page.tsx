@@ -4,14 +4,14 @@ import { Divider } from '@/components/divider/divider';
 import { Typography } from '@/components/ui/typography';
 import { ContactMe } from '@/components/ui/contactMe';
 import { InstaLink } from '@/components/ui/instaLink';
-import React, { Suspense } from 'react';
+import React from 'react';
 import { ShortNews } from '@/components/news/shortNews';
 import { PublicationModel } from '@/shared/models/publication/Publication.model';
 import { getPublicationsWithPhotos } from '@/database/publications.service';
 
 
 
-export default async function Home() {
+export default async function Home(): Promise<React.JSX.Element> {
   const publications: PublicationModel[] = await getPublicationsWithPhotos();
 
   return (
@@ -27,9 +27,7 @@ export default async function Home() {
           <InstaLink />
         </div>
       </Divider>
-      <Suspense>
-        <ShortNews publications={publications}/>
-      </Suspense>
+      <ShortNews publications={publications}/>
     </div>
   );
 }
