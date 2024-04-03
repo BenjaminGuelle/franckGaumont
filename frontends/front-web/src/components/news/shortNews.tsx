@@ -1,17 +1,25 @@
-'use client'
+"use client"
 
 import { TitleSection } from '@/components/ui/titleSection';
 import { SubtitleSection } from '@/components/ui/subtitleSection';
 import { Container } from '@/components/ui/container';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import { NewsCard } from '@/components/news/newsCard';
-import { newsData } from '@/data/news.data';
+import { PublicationModel } from '@/shared/models/publication/Publication.model';
+import { useMemo } from 'react';
+import Image from 'next/image';
 
 interface Props {
-
+  publications: PublicationModel[];
 }
 
-export const ShortNews = ({}: Props) => {
+export const ShortNews = ({publications}: Props) => {
+
+  const activePublications: PublicationModel[] = useMemo(() => {
+    const filteredPublications: PublicationModel[] = publications.filter(pub => pub.isOnline);
+
+    console.log(filteredPublications)
+    return filteredPublications.slice(0, 3);
+  }, [publications]);
 
   return (
     <section>
@@ -27,11 +35,16 @@ export const ShortNews = ({}: Props) => {
 
         <div className={'bg-accent flex min-h-[350px] w-full justify-center p-10 items-center'}>
           <Carousel className="w-full">
-            <CarouselContent className={'gap-x-5'}>
-              {newsData.map((news) => {
+            <CarouselContent className={'gap-x-0'}>
+              {activePublications.map((news) => {
                 return (
-                  <CarouselItem key={news.uid} className={'md:basis-1/2 lg:basis-1/3 bg-grey'}>
-                    <NewsCard />
+                  <CarouselItem key={news.uid} className={'md:basis-1/2 h-full lg:basis-1/3'}>
+                    <div className={'h-full bg-secondary'}>
+                      {news.photos && <Image width={200} height={200} src={news.photos[0].url} alt={'photo'}/>}
+                      <p>{news.title}</p>
+                      <p>{news.description}</p>
+                      <p>{news.city}</p>
+                    </div>
                   </CarouselItem>
                 )
               })}

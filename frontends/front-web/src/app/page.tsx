@@ -4,10 +4,15 @@ import { Divider } from '@/components/divider/divider';
 import { Typography } from '@/components/ui/typography';
 import { ContactMe } from '@/components/ui/contactMe';
 import { InstaLink } from '@/components/ui/instaLink';
-import React from 'react';
+import React, { Suspense } from 'react';
 import { ShortNews } from '@/components/news/shortNews';
+import { PublicationModel } from '@/shared/models/publication/Publication.model';
+import { getPublicationsWithPhotos } from '@/database/publications.service';
 
-export default function Home() {
+
+
+export default async function Home() {
+  const publications: PublicationModel[] = await getPublicationsWithPhotos();
 
   return (
     <div className={'w-full h-full'}>
@@ -22,7 +27,10 @@ export default function Home() {
           <InstaLink />
         </div>
       </Divider>
-      <ShortNews />
+      <Suspense>
+        <ShortNews publications={publications}/>
+      </Suspense>
     </div>
   );
 }
+
