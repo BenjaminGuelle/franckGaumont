@@ -4,6 +4,6 @@ export interface PublicationPhotoModel {
   uid: string;
   url: string;
   name: string;
-  creationDate: Timestamp,
-  updatedDate?: Timestamp,
+  creationDate: Timestamp | number,
+  updatedDate?: Timestamp | number,
 }
