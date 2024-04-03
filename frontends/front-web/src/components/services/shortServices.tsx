@@ -1,5 +1,3 @@
-'use client'
-
 import { Container } from '@/components/ui/container';
 import { TitleSection } from '@/components/ui/titleSection';
 import { SubtitleSection } from '@/components/ui/subtitleSection';
