@@ -4,7 +4,7 @@ import { Container } from '@/components/ui/container';
 import { Typography } from '@/components/ui/typography';
 import { Button } from '@/components/ui/button';
 import bg from '@/public/images/BG-Header.png';
-import franck from '@/public/images/franck.png';
+import franck from '@/public/images/photos/franck.png';
 import React, { useCallback } from 'react';
 import { ContactMe } from '@/components/ui/contactMe';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
@@ -17,12 +17,12 @@ export const HeroTop = () => {
   const navigateTo: (path: string) => void = useCallback((path: string) => router.push(path), [router]);
 
   return (
-    <section style={{
+    <div style={{
       backgroundImage: `url(${bg.src})`,
       backgroundPosition: 'right',
       backgroundSize: 'auto',
     }}
-    className={''}>
+    >
       <Container className={'relative flex items-center lg:h-[590px]'} >
         <div className={'space-y-5 md:space-y-10'}>
           <Typography variant={'t-5'} comp={'h1'} weight={'extrabold'} theme={'white'} className={'md:max-w-xl lg:max-w-3xl capitalize'}>
@@ -41,6 +41,6 @@ export const HeroTop = () => {
           <Image className={'z-10'} src={franck} alt={'franck gaumont'} />
         </div>
       </Container>
-    </section>
+    </div>
   )
 }

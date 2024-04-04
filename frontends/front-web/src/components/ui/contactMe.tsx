@@ -1,15 +1,15 @@
 import Link from 'next/link';
-import { RiInstagramLine } from 'react-icons/ri';
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { SizeType } from '@/types/ui/Size.type';
 
 interface Props {
+  className?: string;
   variant?: 'outline' | 'default' | 'phone';
   size?: SizeType;
 }
 
-export const ContactMe = ({variant = 'default', size = 'small'}: Props) => {
+export const ContactMe = ({className, variant = 'default', size = 'small'}: Props) => {
 
   let variantStyles: string = '';
   switch (variant) {
@@ -39,7 +39,7 @@ export const ContactMe = ({variant = 'default', size = 'small'}: Props) => {
   }
 
   return (
-    <Link href={'/contact'} className={cn('text-center text-white flex items-center gap-2 px-4 py-6', variantStyles, sizeStyles)}>
+    <Link href={'/contact'} className={cn('text-center text-white flex items-center gap-2 px-4 py-6', variantStyles, sizeStyles, className)}>
       Contactez - moi
     </Link>
   )
