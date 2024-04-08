@@ -9,10 +9,10 @@ import { Divider } from '@/components/divider/divider';
 import React from 'react';
 import { PublicationModel } from '@/shared/models/publication/Publication.model';
 import { getPublicationsWithPhotos } from '@/database/publications.service';
-import { ShortNews } from '@/components/news/shortNews';
-import { ContactMe } from '@/components/ui/contactMe';
+import { ShortNews } from '@/components/publications/shortNews';
 import { LiveInstagramAction } from '@/components/ui/liveInstagramAction';
 import bg from '@/public/images/background-tools.png';
+import { ButtonLink } from '@/components/ui/buttonLink';
 
 export default async function Presentation() {
   const publications: PublicationModel[] = await getPublicationsWithPhotos();
@@ -26,14 +26,16 @@ export default async function Presentation() {
         backgroundRepeat: 'no-repeat',
       }}
     >
-      <Container className={'grid grid-cols-12 md:gap-10 lg:gap-20'}>
+      <Container className={'grid grid-cols-12 pt-14 md:pt-20 md:gap-10 lg:gap-20'}>
 
-        <div className={'col-span-12 md:col-span-6'}>
-          <TitleSection title={'Franck Gaumont'}/>
-          <SubtitleSection
-            text={'“Faites vos choix avec mes meilleurs conseils”'}
-            className={'italic'}
-          />
+        <div className={'col-span-12 md:col-span-6 flex flex-col justify-between'}>
+          <div>
+            <TitleSection comp={'h1'} label={'Présentation'} title={'Franck Gaumont'} classNameIcon={'hidden md:block'}/>
+            <SubtitleSection
+              text={'“Faites vos choix avec mes meilleurs conseils”'}
+              className={'italic'}
+            />
+          </div>
           <Typography variant={'base'} weight={'light'} comp={'div'} className={'space-y-5 py-10'}>
             <p>
               Vous êtes à la recherche d’une plombier dans le périmètre de Caen la Mer ? Je suis disponible !
@@ -51,14 +53,14 @@ export default async function Presentation() {
           </div>
         </div>
 
-        <div className={'col-span-12 md:col-span-6 flex flex-col'}>
+        <div className={'col-span-12 md:col-span-6 flex flex-col justify-between'}>
           <div className={'hidden md:flex w-full relative'}>
             <Image src={franckSmile} alt={'photo de franck gaumont avec une cliente'} className={'w-full'}/>
           </div>
           <div className={'md:hidden w-full relative order-2 md:order-1'}>
             <Image src={franckWithGirl} alt={'photo de franck gaumont avec une cliente'} className={'w-full'}/>
           </div>
-          <Typography variant={'base'} weight={'light'} comp={'div'} className={'space-y-5 py-10 order-1 md:order-2'}>
+          <Typography variant={'base'} weight={'light'} comp={'div'} className={'space-y-5 pt-10 pb-10 md:pb-0 order-1 md:order-2'}>
             <p>
               Choisir un artisan à proximité de chez vous permet d’échanger sur site plus facilement et d’intervenir
               plus
@@ -95,7 +97,7 @@ export default async function Presentation() {
             </Typography>
           </div>
         </Typography>
-        <ContactMe className={'flex absolute bottom-0 translate-y-1/2 left-1/2 -translate-x-1/2 text-white'}/>
+        <ButtonLink path={'/contact'} className={'absolute bottom-0 translate-y-1/2 left-1/2 -translate-x-1/2'}>Contactez - moi</ButtonLink>
       </Divider>
       <ShortNews publications={publications}/>
       <div className={'relative flex items-center justify-center h-64 md:py-20'}>

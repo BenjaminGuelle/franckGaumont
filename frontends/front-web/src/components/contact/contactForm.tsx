@@ -80,7 +80,7 @@ export const ContactForm = ({}: Props) => {
             <p className={'italic'}>Votre demande concerne</p>
           </div>
 
-          <div className={'flex md:hidden  col-span-12'}>
+          <div className={'flex lg:hidden  col-span-12'}>
             <FormField
               control={contactForm.control}
               name="category"
@@ -110,56 +110,62 @@ export const ContactForm = ({}: Props) => {
             />
           </div>
 
-          <div className={'hidden md:flex pb-14'}>
+          <div className={'hidden md:block col-span-12 pb-14'}>
             <FormField
               control={contactForm.control}
               name="category"
               render={({ field }) => (
-                <FormItem className="col-span-12">
-                  <FormControl className={'bg-white text-black'}>
+                <FormItem className="">
+                  <FormControl className={'text-black'}>
                     <RadioGroup
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                       className="flex justify-between gap-10"
                     >
-                      <FormItem className="flex relative aspect-square w-52 h-52 items-center shadow-lg border border-white hover:border-accent selection:border-accent">
+                      <FormItem
+                        className="flex relative bg-white aspect-square w-1/3 items-center shadow-lg border border-white hover:border-accent selection:border-accent">
                         <FormControl className={'rounded-none w-full h-full border-none z-10'}>
-                          <RadioGroupItem value="PLUMBING" />
+                          <RadioGroupItem value="PLUMBING"/>
                         </FormControl>
                         <FormLabel className="absolute top-0 left-0 w-full h-full z-0 ">
-                          <div className={'flex flex-col items-center justify-center w-full h-full space-y-5'}>
-                            <div className={'w-16'}>
-                              <Image src={plumbing} alt={'icon service de plomberie'} className={'object-contain w-full'}/>
+                          <div className={'flex flex-col items-center w-full h-full space-y-4 justify-center'}>
+                            <div className={'w-10 lg:w-16'}>
+                              <Image src={plumbing} alt={'icon service de plomberie'}
+                                     className={'object-contain w-full'}/>
                             </div>
-                            <p className={'font-extrabold text-xl'}>Plomberie</p>
+                            <p className={'font-extrabold text-sm lg:text-xl'}>Plomberie</p>
                           </div>
                         </FormLabel>
                       </FormItem>
 
-                      <FormItem className="flex relative aspect-square  w-52 h-52 items-center shadow-lg border border-white hover:border-accent selection:border-accent">
+                      <FormItem
+                        className="flex relative bg-white aspect-square w-1/3 items-center shadow-lg border border-white hover:border-accent selection:border-accent">
                         <FormControl className={'rounded-none w-full h-full border-none z-10'}>
-                          <RadioGroupItem value="ARRANGEMENT" />
+                          <RadioGroupItem value="ARRANGEMENT"/>
                         </FormControl>
                         <FormLabel className="absolute top-0 left-0 w-full h-full z-0 ">
-                          <div className={'flex flex-col items-center justify-center w-full h-full space-y-5'}>
-                            <div className={'w-16'}>
-                              <Image src={bathroom} alt={'icon service de plomberie'} className={'object-contain w-full'}/>
+                          <div className={'flex flex-col items-center w-full h-full space-y-4 justify-center'}>
+                            <div className={'w-8 lg:w-14'}>
+                              <Image src={bathroom} alt={'icon service de plomberie'}
+                                     className={'object-contain w-full'}/>
                             </div>
-                            <p className={'font-extrabold text-xl'}>Agencement</p>
+                            <p className={'font-extrabold text-sm lg:text-xl'}>Agencement</p>
                           </div>
                         </FormLabel>
                       </FormItem>
 
-                      <FormItem className="flex relative aspect-square  w-52 h-52 items-center shadow-lg border border-white hover:border-accent selection:border-accent">
+                      <FormItem
+                        className="flex relative bg-white aspect-square w-1/3 items-center shadow-lg border border-white hover:border-accent selection:border-accent">
                         <FormControl className={'rounded-none w-full h-full border-none z-10'}>
-                          <RadioGroupItem value="REPAIR" />
+                          <RadioGroupItem value="REPAIR"/>
                         </FormControl>
                         <FormLabel className="absolute top-0 left-0 w-full h-full z-0 ">
-                          <div className={'flex flex-col items-center justify-center w-full h-full space-y-5'}>
-                            <div className={'w-16'}>
-                              <Image src={repair} alt={'icon service de plomberie'} className={'object-contain w-full'}/>
+                          <div className={'flex flex-col items-center space-y-4 justify-center w-full h-full'}>
+                            <div className={'w-10 lg:w-16'}>
+                              <Image src={repair} alt={'icon service de plomberie'}
+                                     className={'object-contain w-full'}/>
                             </div>
-                            <p className={'font-extrabold text-xl'}>Dépannage</p>
+                            <p className={'font-extrabold text-sm lg:text-xl'}>Dépannage</p>
                           </div>
                         </FormLabel>
                       </FormItem>

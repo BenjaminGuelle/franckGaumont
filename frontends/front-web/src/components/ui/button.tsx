@@ -3,6 +3,7 @@ import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
+import { Spin } from '@/components/spinner/spin';
 
 const buttonVariants = cva(
   "flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
@@ -10,7 +11,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-secondary text-white shadow hover:bg-secondary/90",
+          "bg-secondary text-white shadow hover:bg-secondary/75",
         outline:
           "border border-input border-white text-white bg-transparent shadow-sm hover:border-grey-100 hover:text-grey",
         secondary:
@@ -35,18 +36,29 @@ const buttonVariants = cva(
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
+  isLoading?: boolean;
+  children?: React.ReactNode;
   asChild?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, children, isLoading,  ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
-      />
+      >
+        {isLoading
+          ? <>
+            <Spin size={'sm'} className={size === 'icon' ? '' : 'mr-2'} variant={'secondary'}/>
+            {size !== 'icon' && <>{children}</>}
+          </>
+          : <>
+            {children}
+          </>}
+      </Comp>
     )
   }
 )

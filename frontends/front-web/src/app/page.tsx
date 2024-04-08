@@ -5,7 +5,7 @@ import { Typography } from '@/components/ui/typography';
 import { ContactMe } from '@/components/ui/contactMe';
 import { InstaLink } from '@/components/ui/instaLink';
 import React from 'react';
-import { ShortNews } from '@/components/news/shortNews';
+import { ShortNews } from '@/components/publications/shortNews';
 import { PublicationModel } from '@/shared/models/publication/Publication.model';
 import { getPublicationsWithPhotos } from '@/database/publications.service';
 import { ContactContainer } from '@/components/contact/contactContainer';
@@ -14,7 +14,7 @@ import { Partners } from '@/components/divider/partners';
 
 
 export default async function Home(): Promise<React.JSX.Element> {
-  const publications: PublicationModel[] = await getPublicationsWithPhotos();
+  const publications: PublicationModel[] = await getPublicationsWithPhotos(3);
 
   return (
     <div className={'w-full h-full'}>

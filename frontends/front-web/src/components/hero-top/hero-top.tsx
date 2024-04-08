@@ -1,20 +1,12 @@
-'use client'
-
 import { Container } from '@/components/ui/container';
 import { Typography } from '@/components/ui/typography';
-import { Button } from '@/components/ui/button';
 import bg from '@/public/images/BG-Header.png';
 import franck from '@/public/images/photos/franck.png';
 import React, { useCallback } from 'react';
-import { ContactMe } from '@/components/ui/contactMe';
-import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { ButtonLink } from '@/components/ui/buttonLink';
 
 export const HeroTop = () => {
-  const router: AppRouterInstance = useRouter();
-
-  const navigateTo: (path: string) => void = useCallback((path: string) => router.push(path), [router]);
 
   return (
     <div style={{
@@ -25,16 +17,18 @@ export const HeroTop = () => {
     >
       <Container className={'relative flex items-center lg:h-[590px]'} >
         <div className={'space-y-5 md:space-y-10'}>
-          <Typography variant={'t-5'} comp={'h1'} weight={'extrabold'} theme={'white'} className={'md:max-w-xl lg:max-w-3xl capitalize'}>
-            Plomberie, aménagement & dépannage
+          <Typography variant={'t-5'} comp={'h1'} weight={'extrabold'} theme={'white'} className={'md:max-w-xl lg:max-w-3xl flex flex-wrap gap-2 md:gap-4 xl:gap-6 capitalize'}>
+            <span>Plomberie,</span>
+            <span>aménagement</span>
+            <span>& dépannage</span>
           </Typography>
           <Typography comp={'div'} weight={'normal'} theme={'white'}>
             <p>Passionné et expérimenté, je transforme vos envies en véritable réussite.</p>
             <p>Mon objectif :  mettre tout mon savoir-faire à disposition de votre projet.</p>
           </Typography>
-          <div className={'flex flex-col space-y-3 pt-5 md:flex-row md:space-y-0 md:gap-x-5'}>
-            <ContactMe />
-            <Button onClick={() => navigateTo('/services')} variant={'outline'}>Découvrez mes compétences</Button>
+          <div className={'flex flex-col space-y-3 md:flex-row md:space-y-0 md:gap-x-5'}>
+            <ButtonLink path={'/contact'}>Contactez - moi</ButtonLink>
+            <ButtonLink variant={'outline'} path={'/services'}>Découvrez mes compétences</ButtonLink>
           </div>
         </div>
         <div className={'hidden lg:flex absolute right-0 w-auto bottom-0'}>

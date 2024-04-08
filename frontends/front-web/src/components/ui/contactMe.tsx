@@ -14,7 +14,7 @@ export const ContactMe = ({className, variant = 'default', size = 'small'}: Prop
   let variantStyles: string = '';
   switch (variant) {
     case 'default':
-      variantStyles = 'justify-center rounded bg-secondary';
+      variantStyles = 'justify-center rounded bg-secondary hover:bg-secondary/75';
       break;
     case 'outline':
       variantStyles = 'justify-center border rounded';
@@ -24,11 +24,11 @@ export const ContactMe = ({className, variant = 'default', size = 'small'}: Prop
       break;
   }
 
-  let sizeStyles: string = 'min-w-40 text-sm';
+  let sizeStyles: string = 'min-w-40 text-md';
   switch (size) {
     case 'very-small':
     case 'small':
-      sizeStyles = `${sizeStyles} h-9 px-4 py-2 rounded`;
+      sizeStyles = `${sizeStyles} h-9 px-5 py-2 rounded`;
       break;
     case 'medium':
       sizeStyles = `${sizeStyles} h-8 rounded px-3`;
@@ -39,7 +39,7 @@ export const ContactMe = ({className, variant = 'default', size = 'small'}: Prop
   }
 
   return (
-    <Link href={'/contact'} className={cn('text-center text-white flex items-center gap-2 px-4 py-6', variantStyles, sizeStyles, className)}>
+    <Link href={'/contact'} className={cn('text-center text-white flex items-center gap-2 px-5 py-6', variantStyles, sizeStyles, className)}>
       Contactez - moi
     </Link>
   )
