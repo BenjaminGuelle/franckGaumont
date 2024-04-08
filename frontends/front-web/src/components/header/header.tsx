@@ -18,8 +18,8 @@ export const Header = () => {
   }
 
   return (
-    <header>
-      <div className={'relative z-50'}>
+    <header className={'sticky top-0 z-50'}>
+      <div className={'relative z-50 '}>
         <div className={'h-16 bg-primary'} style={{
           backgroundImage: `url(${bg.src})`,
           backgroundPosition: 'left',

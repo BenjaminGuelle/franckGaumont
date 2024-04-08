@@ -3,8 +3,8 @@ import { PublicationPhotoModel } from './PublicationPhoto.model';
 
 export interface PublicationModel {
   uid: string;
-  creationDate: Timestamp,
-  updatedDate?: Timestamp,
+  creationDate: Timestamp | number,
+  updatedDate?: Timestamp | number,
 
   title: string;
   description: string;
@@ -13,7 +13,8 @@ export interface PublicationModel {
 
   isOnline: boolean;
 
-  images?: PublicationPhotoModel[];
+  // always for front
+  photos?: PublicationPhotoModel[];
 }
 
 export type CategoryModel = 'ARRANGEMENT' | 'PLUMBING';

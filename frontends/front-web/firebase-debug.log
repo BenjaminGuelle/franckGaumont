@@ -1,0 +1,21 @@
+[debug] [2024-03-28T17:25:03.966Z] ----------------------------------------------------------------------
+[debug] [2024-03-28T17:25:03.968Z] Command:       /Users/benjaminguelle/.nvm/versions/node/v18.17.1/bin/node /Users/benjaminguelle/.nvm/versions/node/v18.17.1/bin/firebase init
+[debug] [2024-03-28T17:25:03.968Z] CLI Version:   13.5.2
+[debug] [2024-03-28T17:25:03.969Z] Platform:      darwin
+[debug] [2024-03-28T17:25:03.969Z] Node Version:  v18.17.1
+[debug] [2024-03-28T17:25:03.970Z] Time:          Thu Mar 28 2024 18:25:03 GMT+0100 (Central European Standard Time)
+[debug] [2024-03-28T17:25:03.970Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-03-28T17:25:03.977Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-03-28T17:25:03.977Z] > authorizing via signed-in user (benjamin.guelle@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/benjaminguelle/WebstormProjects/franckgaumont/frontends/front-web
+

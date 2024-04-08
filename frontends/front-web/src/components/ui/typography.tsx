@@ -29,19 +29,19 @@ export const Typography = ({
       variantStyles = `${variantStyles} text-md md:text-base leading-7`;
       break;
     case 'lead':
-      variantStyles = `${variantStyles} text-md leading-7`;
+      variantStyles = `${variantStyles} text-sm md:text-md leading-7`;
       break;
     case 't-1':
-      variantStyles = `${variantStyles} text-xl leading-7`;
+      variantStyles = `${variantStyles} text-base md:text-xl leading-7`;
       break;
     case 't-2':
       variantStyles = `${variantStyles} text-xl md:text-2xl leading-7`;
       break;
     case 't-3':
-      variantStyles = `${variantStyles} text-3xl leading-7`;
+      variantStyles = `${variantStyles} text-2xl md:text-3xl leading-7`;
       break;
     case 't-4':
-      variantStyles = `${variantStyles} text-3xl lg:text-4xl uppercase leading-7`;
+      variantStyles = `${variantStyles} text-3xl md:text-4xl uppercase leading-7`;
       break;
     case 't-5':
       variantStyles = `${variantStyles} text-3xl md:text-4xl lg:text-5xl leading-7`;

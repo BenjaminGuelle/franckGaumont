@@ -4,18 +4,18 @@ import { cn } from '@/lib/utils';
 
 interface Props {
   text: string;
-  buttonText: string;
-  path: string;
+  buttonText?: string;
+  path?: string;
   className?: string;
 }
 
 export const SubtitleSection: ({ text, className }: Props) => JSX.Element = ({text, buttonText, path, className}: Props) => {
   return (
-    <div className={cn('flex justify-between pt-5', className)}>
+    <div className={cn('flex justify-between pt-20 md:pt-10 lg:pt-5', className)}>
       <Typography className={'lg:border-l lg:pl-5 lg:pr-20 flex-1'}>
         {text}
       </Typography>
-      <ActionLink path={path} text={buttonText}/>
+      {(path && buttonText) && <ActionLink path={path} text={buttonText}/>}
     </div>
   )
 }

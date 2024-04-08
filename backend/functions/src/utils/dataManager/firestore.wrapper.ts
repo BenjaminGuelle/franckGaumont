@@ -125,7 +125,7 @@ export class FirestoreWrapper {
     } else {
       await ref.set({
         ...value,
-        createdDate: Timestamp.now(),
+        creationDate: Timestamp.now(),
         updatedDate: Timestamp.now(),
       });
     }

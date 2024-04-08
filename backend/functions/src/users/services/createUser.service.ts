@@ -29,9 +29,12 @@ async function createUserInDb(request: CreateUserRequest, uid: string): Promise<
     const userPublic: UserModel = {
       uid,
       creationDate: Timestamp.now(),
-      ...request,
       isAdmin: false,
       isSuperAdmin: false,
+      firstName: request.firstName || '',
+      lastName: request.lastName || '',
+      email: request.email,
+      description: request.description || '',
     };
 
     await db.set('USERS', userPublic)

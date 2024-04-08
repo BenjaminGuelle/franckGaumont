@@ -3,6 +3,7 @@ import './globals.css';
 import React from 'react';
 import { Footer } from '@/components/footer/footer';
 import { Header } from '@/components/header/header';
+import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
   title: 'Franck Gaumont - ',
@@ -22,6 +23,7 @@ export default function RootLayout({
         {children}
       </main>
       <Footer/>
+      <Toaster/>
     </body>
     </html>
   );

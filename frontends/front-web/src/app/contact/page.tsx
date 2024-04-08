@@ -1,10 +1,9 @@
-import { Typography } from '@/components/ui/typography';
+import React from 'react';
+import { ContactContainer } from '@/components/contact/contactContainer';
 
 export default function Contact() {
 
   return (
-    <main className={'bg-accent w-full h-full'}>
-      <Typography>Contact</Typography>
-    </main>
+    <ContactContainer />
   );
 }
