@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -23,12 +23,18 @@ import {
 } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
+import { sendEmailContact } from '@/database/mail.service';
+import { SendEmailRequest } from '@/shared/requests/mails/SendEmail.request';
+import { ConfirmationResponse } from '@/shared/responses/Confirmation.response';
+import { toast } from '@/components/ui/use-toast';
 
 export interface Props {
 
 }
 
 export const ContactForm = ({}: Props) => {
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const categoryModel = z.union([
     z.literal('ARRANGEMENT'),
@@ -41,11 +47,11 @@ export const ContactForm = ({}: Props) => {
     firstName: z.string().min(1, {message: `Vous devez renseigner votre nom`}),
     lastName: z.string(),
     email: z.string().min(1, {message: `Vous devez renseigner votre email`}),
-    phone: z.number()
+    phone: z.string()
       .min(1, {message: `Le numéro de téléphone doit faire 10 chiffres ou moins`})
       .max(10, {message: `Le numéro de téléphone doit faire 10 chiffres ou moins`}),
     address: z.string().min(1, {message: `Vous devez renseigner votre adresse`}),
-    postalCode: z.number()
+    postalCode: z.string()
       .min(1, {message: `Le code postal doit faire 5 chiffres ou moins`})
       .max(10, {message: `Le code postal doit faire 5 chiffres ou moins`}),
     city: z.string().min(1, {message: `Vous devez renseigner votre ville`}),
@@ -60,21 +66,37 @@ export const ContactForm = ({}: Props) => {
     defaultValues: {
       firstName: '',
       lastName: '',
-      phone: undefined,
+      phone: '',
       address: '',
       email: '',
-      postalCode: undefined,
+      postalCode: '',
       message: '',
       city: '',
-      category: undefined,
+      category: 'PLUMBING',
       acceptUseData: false,
     },
   });
 
+  const onSubmit = useCallback(async (values: z.infer<typeof contactSchema>) => {
+    setIsLoading(true);
+    const request: SendEmailRequest = {
+      ...values,
+    }
+    const result: ConfirmationResponse = await sendEmailContact(request);
+    if (result.info) {
+      contactForm.reset();
+      toast({
+        title: 'Nouvelle demande de contact',
+        description: `Votre demande de contact à bien étée envoyée.`,
+      });
+    }
+    setIsLoading(false);
+  }, [contactForm]);
+
   return (
     <div className={'w-full md:w-2/3 md:pl-24'}>
       <Form {...contactForm}>
-        <form className="w-full focus-within:shadow-sm grid grid-cols-12 gap-4">
+        <form onSubmit={contactForm.handleSubmit(onSubmit)} className="w-full focus-within:shadow-sm grid grid-cols-12 gap-4">
           <div className="hidden md:flex col-span-12 items-center gap-2 pb-5">
             <div className="w-6 border-b border-b-secondary"></div>
             <p className={'italic'}>Votre demande concerne</p>
@@ -224,7 +246,7 @@ export const ContactForm = ({}: Props) => {
             render={({ field }) => (
               <FormItem className="col-span-12 lg:col-span-6">
                 <FormControl className={'bg-white text-black pl-2'}>
-                  <Input placeholder="Téléphone" {...field} type={'text'}/>
+                  <Input placeholder="Téléphone" {...field} type={'tel'}/>
                 </FormControl>
                 <FormMessage/>
               </FormItem>
@@ -234,7 +256,7 @@ export const ContactForm = ({}: Props) => {
             control={contactForm.control}
             name="address"
             render={({ field }) => (
-              <FormItem className="col-span-12 lg:col-span-6">
+              <FormItem className="col-span-12">
                 <FormControl className={'bg-white text-black pl-2'}>
                   <Input placeholder="Adresse" {...field} type={'text'}/>
                 </FormControl>
@@ -242,6 +264,20 @@ export const ContactForm = ({}: Props) => {
               </FormItem>
             )}
           />
+
+          <FormField
+            control={contactForm.control}
+            name="postalCode"
+            render={({ field }) => (
+              <FormItem className="col-span-12 lg:col-span-6">
+                <FormControl className={'bg-white text-black pl-2'}>
+                  <Input placeholder="Code postal" {...field} type={'text'}/>
+                </FormControl>
+                <FormMessage/>
+              </FormItem>
+            )}
+          />
+
           <FormField
             control={contactForm.control}
             name="city"
@@ -285,7 +321,7 @@ export const ContactForm = ({}: Props) => {
             )}
           />
 
-          <Button className={'px-10 py-6 w-36 text-lg uppercase'}>
+          <Button type={'submit'} className={'px-10 py-6 w-36 text-lg uppercase'}>
             Envoyer
           </Button>
 

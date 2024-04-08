@@ -5,6 +5,7 @@ import { PublicationModel } from '../models/publication/Publication.model';
 import { ConfirmationResponse } from '../responses/Confirmation.response';
 import { UpdatePublicationRequest } from '../requests/publications/UpdatePublication.request';
 import { DeletePublicationFileRequest } from '../requests/publications/DeletePublicationFile.request';
+import { SendEmailRequest } from '../requests/mails/SendEmail.request';
 
 export interface FirebaseFunctions {
   createUser: {
@@ -37,4 +38,9 @@ export interface FirebaseFunctions {
     request: DeletePublicationFileRequest;
     response: ConfirmationResponse;
   },
+  sendEmail: {
+    functionName: 'MAIL-send_email';
+    request: SendEmailRequest;
+    response: ConfirmationResponse;
+  }
 }

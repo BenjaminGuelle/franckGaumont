@@ -4,3 +4,4 @@ admin.initializeApp();
 
 export * as USERS from './users';
 export * as PUBLICATIONS from './publications';
+export * as MAIL from './mail';

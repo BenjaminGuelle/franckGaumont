@@ -1,5 +1,5 @@
+import { Timestamp } from 'firebase-admin/firestore';
 import { PublicationPhotoModel } from './PublicationPhoto.model';
-import { Timestamp } from '@firebase/firestore';
 
 export interface PublicationModel {
   uid: string;
