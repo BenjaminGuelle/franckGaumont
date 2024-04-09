@@ -15,7 +15,7 @@ import bg from '@/public/images/background-tools.png';
 import { ButtonLink } from '@/components/ui/buttonLink';
 
 export default async function Presentation() {
-  const publications: PublicationModel[] = await getPublicationsWithPhotos();
+  const publications: PublicationModel[] = await getPublicationsWithPhotos(3);
 
   return (
     <div
