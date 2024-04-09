@@ -92,7 +92,7 @@ export const PublicationDetails = ({ publication }: Props) => {
         </aside>
         <div className={'col-span-12 md:col-span-6'}>
           <Button onClick={() => router.push(`/actualites`)} variant={'default'} className={'px-6 py-3'}>
-            Retour aux auctus
+            Retour aux actus
           </Button>
         </div>
         {/* ICI LES BOUTONS DE NAVIGATIONS | A AJOUTER PLUS TARD */}
