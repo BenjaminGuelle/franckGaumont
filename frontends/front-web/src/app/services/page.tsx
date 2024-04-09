@@ -43,7 +43,7 @@ export default async function Services() {
                   </figure>
                   <Typography comp={'h3'} variant={'t-2'} weight={'semibold'}
                               className={'relative pl-5 md:pl-0 md:pt-5 pb-2 serviceTitle'}>
-                    Plombderie
+                    Plomberie
                   </Typography>
                 </div>
                 <Typography comp={'article'} variant={'base'} className={'space-y-5'}>
