@@ -1,5 +1,5 @@
 import { PublicationModel } from '@/shared/models/publication/Publication.model';
-import { getPublicationByIdWithPhotos } from '@/database/publications.service';
+import { getPublicationByIdWithPhotos, getPublicationsWithPhotos } from '@/database/publications.service';
 import { PublicationDetails } from '@/components/publications/publication-details';
 import { Typography } from '@/components/ui/typography';
 import { Divider } from '@/components/divider/divider';
@@ -7,6 +7,14 @@ import React from 'react';
 import { ContactContainer } from '@/components/contact/contactContainer';
 import { ButtonLink } from '@/components/ui/buttonLink';
 import { RiInstagramLine } from 'react-icons/ri';
+
+export async function generateStaticParams() {
+  const publications = await getPublicationsWithPhotos();
+
+  return publications.map((pub) => ({
+    publicationId: pub.uid.toString(),
+  }));
+}
 
 export default async function Page({ params }: { params: { publicationId: string} }) {
   const publication: PublicationModel = await getPublicationByIdWithPhotos(params.publicationId);

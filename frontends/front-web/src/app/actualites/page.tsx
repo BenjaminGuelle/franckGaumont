@@ -14,7 +14,7 @@ import { ButtonLink } from '@/components/ui/buttonLink';
 import { RiInstagramLine } from 'react-icons/ri';
 
 export default async function News() {
-  const {data, lastVisible}: getPublicationsWithPaginationResponse = await getPublicationsWithPhotosWithPagination({perPage: 3});
+  const {data, lastVisible}: getPublicationsWithPaginationResponse = await getPublicationsWithPhotosWithPagination({perPage: 6});
 
   return (
     <>

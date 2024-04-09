@@ -25,7 +25,7 @@ export const Publications = ({ publications, lastVisible }: Props) => {
 
   const loadDataMore: () => Promise<void> = useCallback(async () => {
     setIsLoading(true);
-    const {data, lastVisible}: getPublicationsWithPaginationResponse = await getPublicationsWithPhotosWithPagination({perPage: 3, lastVisible: lastPublication});
+    const {data, lastVisible}: getPublicationsWithPaginationResponse = await getPublicationsWithPhotosWithPagination({perPage: 6, lastVisible: lastPublication});
     setLastPublication(lastVisible);
     setPublicationsActive((prevState) => [...prevState, ...data]);
     setIsLoading(false);

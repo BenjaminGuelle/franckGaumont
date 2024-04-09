@@ -5,6 +5,7 @@ const nextConfig = {
         unoptimized: true,
         domains: ['firebasestorage.googleapis.com'],
     },
+    output: 'export',
 };
 
 export default nextConfig;
