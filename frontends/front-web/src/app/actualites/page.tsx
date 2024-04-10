@@ -3,7 +3,6 @@ import React from 'react';
 import { TitleSection } from '@/components/ui/titleSection';
 import { SubtitleSection } from '@/components/ui/subtitleSection';
 import {
-  getPublicationsWithPaginationResponse,
   getPublicationsWithPhotosWithPagination,
 } from '@/database/publications.service';
 import { Publications } from '@/components/publications/publications';
@@ -12,9 +11,10 @@ import { Divider } from '@/components/divider/divider';
 import { ShortServices } from '@/components/services/shortServices';
 import { ButtonLink } from '@/components/ui/buttonLink';
 import { RiInstagramLine } from 'react-icons/ri';
+import { GetPublicationsWithPaginationResponse } from '@/shared/responses/GetPublicationsWithPagination.response';
 
 export default async function News() {
-  const {data, lastVisible}: getPublicationsWithPaginationResponse = await getPublicationsWithPhotosWithPagination({perPage: 6});
+  const {data, lastVisible, lastPriority}: GetPublicationsWithPaginationResponse = await getPublicationsWithPhotosWithPagination({perPage: 6});
 
   return (
     <>
@@ -25,7 +25,7 @@ export default async function News() {
             'Découvrez des exemples de chantiers réussis, témoignant de ma passion, de matériaux de qualité et de mon savoir-faire en action.'}
         />
 
-        <Publications publications={data} lastVisible={lastVisible}/>
+        <Publications publications={data} lastVisible={lastVisible} lastPriority={lastPriority}/>
 
       </Container>
       <Divider>

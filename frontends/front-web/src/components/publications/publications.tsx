@@ -6,30 +6,33 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { PublicationCard } from '@/components/publications/publicationCard';
 import {
-  getPublicationsWithPaginationResponse,
   getPublicationsWithPhotosWithPagination,
 } from '@/database/publications.service';
+import { GetPublicationsWithPaginationResponse } from '@/shared/responses/GetPublicationsWithPagination.response';
 
 interface Props {
   publications: PublicationModel[];
   lastVisible?: number;
+  lastPriority?: boolean;
 }
 
-export const Publications = ({ publications, lastVisible }: Props) => {
+export const Publications = ({ publications, lastVisible, lastPriority }: Props) => {
 
   const [cat, setCat] = useState<CategoryModel | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [lastPublication, setLastPublication] = useState<number | undefined>(lastVisible);
+  const [lastPublicationPriority, setLastPublicationPriority] = useState<boolean | undefined>(lastPriority);
   const [publicationsActive, setPublicationsActive] = useState<PublicationModel[]>(publications.filter((pub) => pub.isOnline));
   const [publicationsFiltered, setPublicationsFiltered] = useState<PublicationModel[]>([]);
 
   const loadDataMore: () => Promise<void> = useCallback(async () => {
     setIsLoading(true);
-    const {data, lastVisible}: getPublicationsWithPaginationResponse = await getPublicationsWithPhotosWithPagination({perPage: 6, lastVisible: lastPublication});
+    const {data, lastVisible, lastPriority}: GetPublicationsWithPaginationResponse = await getPublicationsWithPhotosWithPagination({perPage: 6, lastVisible: lastPublication, lastPriority: lastPublicationPriority});
     setLastPublication(lastVisible);
+    setLastPublicationPriority(lastPriority);
     setPublicationsActive((prevState) => [...prevState, ...data]);
     setIsLoading(false);
-  }, [lastPublication]);
+  }, [lastPublication, lastPublicationPriority]);
 
   useEffect(() => {
     setPublicationsFiltered(

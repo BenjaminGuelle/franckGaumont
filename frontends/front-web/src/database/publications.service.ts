@@ -10,6 +10,10 @@ import { FirebaseWrapperClient } from '@/database/firebase.service';
 import { PublicationModel } from '@/shared/models/publication/Publication.model';
 import { PublicationPhotoModel } from '@/shared/models/publication/PublicationPhoto.model';
 import { query } from '@firebase/firestore';
+import {
+  GetPublicationsWithPaginationRequest
+} from '@/shared/requests/publications/GetPublicationsWithPagination.request';
+import { GetPublicationsWithPaginationResponse } from '@/shared/responses/GetPublicationsWithPagination.response';
 
 const fs = new FirebaseWrapperClient;
 
@@ -19,9 +23,22 @@ export async function getPublicationsWithPhotos(withLimit?: number): Promise<Pub
   let publicationsQuery;
 
   if (withLimit) {
-    publicationsQuery = query(collectionSnapshot, where('isOnline', '==', true), orderBy('creationDate', 'desc'), limit(3));
+    publicationsQuery =
+      query(
+        collectionSnapshot,
+        where('isOnline', '==', true),
+        orderBy('priority', 'desc'),
+        orderBy('creationDate', 'desc'),
+        limit(withLimit),
+      );
   } else {
-    publicationsQuery = query(collectionSnapshot, where('isOnline', '==', true), orderBy('creationDate', 'desc'));
+    publicationsQuery =
+      query(
+        collectionSnapshot,
+        where('isOnline', '==', true),
+        orderBy('priority', 'desc'),
+        orderBy('creationDate', 'desc'),
+      );
   }
 
   const querySnapshot = await getDocs(publicationsQuery);
@@ -37,31 +54,22 @@ export async function getPublicationsWithPhotos(withLimit?: number): Promise<Pub
   return returnPublicationWithPhotoSerialized(publications);
 }
 
-export interface getPublicationsWithPaginationRequest {
-  perPage: number;
-  lastVisible?: number;
-}
-
-export interface getPublicationsWithPaginationResponse {
-  data: PublicationModel[];
-  lastVisible?: number;
-}
-
-export async function getPublicationsWithPhotosWithPagination(request: getPublicationsWithPaginationRequest): Promise<getPublicationsWithPaginationResponse> {
-  const { perPage = 9 }: getPublicationsWithPaginationRequest = request;
+export async function getPublicationsWithPhotosWithPagination(request: GetPublicationsWithPaginationRequest): Promise<GetPublicationsWithPaginationResponse> {
+  const { perPage = 9 }: GetPublicationsWithPaginationRequest = request;
 
   const collectionSnapshot: CollectionReference = fs.getCollectionRef('PUBLICATIONS');
 
   let publicationsQuery;
   let lastVisible: number | undefined = request.lastVisible;
+  let lastPriority: boolean = request.lastPriority || false;
   let data: PublicationModel[] = [];
 
   if (lastVisible) {
     const date = new Date(lastVisible);
     const lastVisibleToTimestamp = Timestamp.fromDate(date);
-    publicationsQuery = query(collectionSnapshot, where('isOnline', '==', true), orderBy('creationDate'), startAfter(lastVisibleToTimestamp), limit(perPage));
+    publicationsQuery = query(collectionSnapshot, where('isOnline', '==', true),orderBy('priority', 'desc'), orderBy('creationDate'), startAfter(lastPriority, lastVisibleToTimestamp), limit(perPage));
   } else {
-    publicationsQuery = query(collectionSnapshot, where('isOnline', '==', true), orderBy('creationDate'), limit(perPage));
+    publicationsQuery = query(collectionSnapshot, where('isOnline', '==', true), orderBy('priority', 'desc'),orderBy('creationDate'), limit(perPage));
   }
 
   const querySnapshot = await getDocs(publicationsQuery);
@@ -80,7 +88,7 @@ export async function getPublicationsWithPhotosWithPagination(request: getPublic
     data = await returnPublicationWithPhotoSerialized(publications);
   }
 
-  return { lastVisible, data };
+  return { lastVisible, lastPriority, data };
 }
 
 export async function getPublicationByIdWithPhotos(publicationId: string): Promise<PublicationModel> {

@@ -19,7 +19,7 @@ import { ButtonLink } from '@/components/ui/buttonLink';
 import { RiInstagramLine } from 'react-icons/ri';
 
 export default async function Services() {
-  const publications: PublicationModel[] = await getPublicationsWithPhotos();
+  const publications: PublicationModel[] = await getPublicationsWithPhotos(3);
   return (
     <div
       style={{
