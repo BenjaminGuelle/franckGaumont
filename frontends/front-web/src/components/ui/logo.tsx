@@ -19,7 +19,7 @@ export const Logo: ({ size, className }: Props) => JSX.Element = ({size = 'mediu
       sizeStyles = 'w-[109px] h-[109px]';
       break;
     case 'large':
-      sizeStyles = 'w-[157px] h-[157px]';
+      sizeStyles = 'w-[109px] h-[109px] md:w-[157px] md:h-[157px]';
       break;
   }
 

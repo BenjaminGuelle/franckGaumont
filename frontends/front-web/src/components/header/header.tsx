@@ -36,7 +36,7 @@ export const Header = () => {
 
         <nav className={'h-12 bg-gradient-to-r from-secondary-100 via-secondary to-secondary-300'}>
           <Container className={'py-0 flex h-12 justify-end relative'}>
-            <div className={'absolute -top-8 left-5'}>
+            <div className={'absolute -top-5 md:-top-8 left-2 md:left-0 lg:-left-[1.5rem]'}>
               <Link href={'/'}>
                 <Logo size={'large'}/>
               </Link>
