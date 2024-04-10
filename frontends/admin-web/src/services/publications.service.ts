@@ -10,6 +10,7 @@ const db = new FirebaseWrapperClient;
 
 export async function createPublication(request: CreatePublicationRequest): Promise<PublicationModel | undefined> {
   try {
+    console.log('REQUEST', request)
     const publication: PublicationModel = await db.onCall<'createPublication'>('PUBLICATIONS-create_publication', request);
     toast({
       title: 'Nouvelle publication ajoutée !',
@@ -88,6 +89,7 @@ export async function deletePublicationFile(publicationId: string, fileId: strin
 
 export async function updatePublication(request: UpdatePublicationRequest): Promise<void> {
   const {publicationUid} = request;
+  console.log('request update', request)
   try {
     await db.onCall<'updatePublication'>('PUBLICATIONS-update_publication', request);
     toast({

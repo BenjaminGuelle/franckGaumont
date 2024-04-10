@@ -11,6 +11,7 @@ export const publicationSchema = z.object({
   city: z.string().min(1, {message: `La ville est oblibatoire`}),
   category: CategoryModel,
   isOnline: z.boolean(),
+  priority: z.boolean(),
 });
 
 export type PublicationValues = z.infer<typeof publicationSchema>;

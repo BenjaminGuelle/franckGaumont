@@ -12,13 +12,14 @@ export const create_publication = onCall({
 
   const requestBody: CreatePublicationRequest = req.data;
 
-  const {title, description, category, city, isOnline} = requestBody;
+  const {title, description, category, city, isOnline, priority} = requestBody;
 
   isString(title, 'title');
   isString(description, 'description');
   isString(city, 'city');
   isIncludedIn(category, ['ARRANGEMENT', 'PLUMBING'], category);
   isBoolean(isOnline, 'isOnline');
+  isBoolean(priority, 'priority');
 
   try {
     return await db.add('PUBLICATIONS', requestBody);

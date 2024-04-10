@@ -20,14 +20,14 @@ interface Props {
 }
 
 export const PublicationDetails = ({publication}: Props) => {
-  const {uid, description, title, city, category, isOnline} = publication;
+  const {uid, description, title, city, category, isOnline, priority} = publication;
   const router = useRouter();
   const [photos, setPhotos] = useState<PublicationPhotoModel[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
 
   const initialData: PublicationValues = {
-    title, description, city, category, isOnline
+    title, description, city, category, isOnline, priority
   }
 
   const getPhotos: () => Promise<void> = useCallback(async () => {

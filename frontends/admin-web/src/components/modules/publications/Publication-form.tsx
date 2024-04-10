@@ -18,8 +18,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { useCallback, useState } from 'react';
 import { RxUpdate } from 'react-icons/rx';
 import { Switch } from '@/components/ui/switch';
-import { Simulate } from 'react-dom/test-utils';
-import submit = Simulate.submit;
 
 interface Props {
   callbackSubmit: (values: PublicationValues) => Promise<void>;
@@ -38,6 +36,7 @@ export const PublicationForm = ({ callbackSubmit, initialData }: Props) => {
       city: '',
       category: 'ARRANGEMENT',
       isOnline: false,
+      priority: false,
     },
   });
 
@@ -62,26 +61,48 @@ export const PublicationForm = ({ callbackSubmit, initialData }: Props) => {
       <Form {...publicationForm}>
         <form onSubmit={publicationForm.handleSubmit(onSubmit)} className="space-y-8">
           <div className={'flex flex-col gap-5 md:gap-10 py-5'}>
-            <FormField
-              control={publicationForm.control}
-              name="isOnline"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl className={'bg-white text-black pl-2'}>
-                    <div className={'flex gap-4 items-center'}>
-                      <p>Publication en ligne:</p>
-                      <span>
+            <div className={'flex flex-col md:flex-row justify-between'}>
+              <FormField
+                control={publicationForm.control}
+                name="isOnline"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl className={'bg-white text-black pl-2'}>
+                      <div className={'flex gap-4 items-center'}>
+                        <p>Publication en ligne:</p>
+                        <span>
                         <Switch
                           checked={field.value}
                           onCheckedChange={field.onChange}
                         />
                       </span>
-                    </div>
-                  </FormControl>
-                  <FormMessage/>
-                </FormItem>
-              )}
-            />
+                      </div>
+                    </FormControl>
+                    <FormMessage/>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={publicationForm.control}
+                name="priority"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl className={'bg-white text-black pl-2'}>
+                      <div className={'flex gap-4 items-center'}>
+                        <p>Publication prioritaire:</p>
+                        <span>
+                        <Switch
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </span>
+                      </div>
+                    </FormControl>
+                    <FormMessage/>
+                  </FormItem>
+                )}
+              />
+            </div>
             <FormField
               control={publicationForm.control}
               name="title"

@@ -12,6 +12,7 @@ export interface PublicationModel {
   city: string;
 
   isOnline: boolean;
+  priority: boolean;
 
   // always for front
   photos?: PublicationPhotoModel[];

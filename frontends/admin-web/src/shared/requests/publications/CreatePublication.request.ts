@@ -6,4 +6,5 @@ export interface CreatePublicationRequest {
   city: string;
   category: CategoryModel;
   isOnline: boolean;
+  priority: boolean;
 }
