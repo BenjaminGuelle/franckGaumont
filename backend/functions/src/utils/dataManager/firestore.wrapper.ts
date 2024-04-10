@@ -172,7 +172,7 @@ export class FirestoreWrapper {
     return this.getCollection(collectionName).doc(docUid).collection(subCollectionName);
   }
 
-  private getCollectionReference(root: FirestoreWrapperRoot): FirestoreWrapperCollection {
+  getCollectionReference(root: FirestoreWrapperRoot): FirestoreWrapperCollection {
     return typeof root !== 'string' ? root : this.db.collection(root);
   }
 

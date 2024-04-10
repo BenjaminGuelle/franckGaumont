@@ -27,3 +27,16 @@ export async function updatePublicationPhotos(publicationUid: string, photos: Pa
   }
 }
 
+export async function patchPublicationsPriority(db: FirestoreWrapper) {
+  const snapshot = await db.getAll<PublicationModel>('PUBLICATIONS');
+
+  snapshot.forEach((publication) => {
+    try {
+      db.update('PUBLICATIONS', publication.uid, {priority: false});
+      console.log(`${publication.uid} à été mis à jour avec le champ priority défini sur false`);
+    } catch (e) {
+      console.log(`${publication.uid} error`);
+    }
+  });
+}
+

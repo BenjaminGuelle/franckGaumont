@@ -24,10 +24,8 @@ export async function getPublicationsWithPhotos(withLimit?: number): Promise<Pub
 
   if (withLimit) {
     publicationsQuery =
-      query(
-        collectionSnapshot,
+      query(collectionSnapshot,
         where('isOnline', '==', true),
-        orderBy('priority', 'desc'),
         orderBy('creationDate', 'desc'),
         limit(withLimit),
       );
@@ -36,7 +34,6 @@ export async function getPublicationsWithPhotos(withLimit?: number): Promise<Pub
       query(
         collectionSnapshot,
         where('isOnline', '==', true),
-        orderBy('priority', 'desc'),
         orderBy('creationDate', 'desc'),
       );
   }
@@ -67,9 +64,9 @@ export async function getPublicationsWithPhotosWithPagination(request: GetPublic
   if (lastVisible) {
     const date = new Date(lastVisible);
     const lastVisibleToTimestamp = Timestamp.fromDate(date);
-    publicationsQuery = query(collectionSnapshot, where('isOnline', '==', true),orderBy('priority', 'desc'), orderBy('creationDate'), startAfter(lastPriority, lastVisibleToTimestamp), limit(perPage));
+    publicationsQuery = query(collectionSnapshot, where('isOnline', '==', true), orderBy('creationDate', 'desc'), startAfter(lastVisibleToTimestamp), limit(perPage));
   } else {
-    publicationsQuery = query(collectionSnapshot, where('isOnline', '==', true), orderBy('priority', 'desc'),orderBy('creationDate'), limit(perPage));
+    publicationsQuery = query(collectionSnapshot, where('isOnline', '==', true), orderBy('creationDate', 'desc'), limit(perPage));
   }
 
   const querySnapshot = await getDocs(publicationsQuery);
