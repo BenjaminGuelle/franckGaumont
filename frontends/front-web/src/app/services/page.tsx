@@ -30,7 +30,7 @@ export default async function Services() {
       }}
     >
       <Container className={'pt-14 md:pt-20'}>
-        <TitleSection comp={'h1'} label={'Services'} title={'Les interventions'} classNameIcon={'hidden md:block'}/>
+        <TitleSection comp={'h1'} label={'Services'} title={'Les interventions'}/>
 
         <section className={'space-y-20 py-10 lg:mb-20'}>
           <div className={'flex flex-col'}>
@@ -144,11 +144,11 @@ export default async function Services() {
 
       </Container>
       <Divider>
-        <Typography variant={'t-3'} theme={'white'} weight={'light'} className={'text-center lg:text-left'}>
-          Vous avez un projet <span className={'font-extrabold'}>d’installation</span> ou de <span
-          className={'font-extrabold'}>rénovation</span> ?
+        <Typography comp={'div'} variant={'t-3'} theme={'white'} weight={'light'} className={'text-center lg:text-left leading-7 md:space-y-2'}>
+          <p>Vous avez un projet <span className={'font-extrabold uppercase'}>d’installation</span></p>
+          <p>ou de <span className={'font-extrabold uppercase'}>rénovation</span> ?</p>
         </Typography>
-        <div className={'flex flex-col space-y-3 pt-5 md:flex-row md:space-y-0 md:gap-x-5'}>
+        <div className={'flex flex-col items-center justify-center lg:justify-normal space-y-3 pt-5 md:flex-row md:space-y-0 md:gap-x-5'}>
           <ButtonLink path={'/contact'}>Contactez - moi</ButtonLink>
           <ButtonLink variant={'outline'} path={'https://www.instagram.com/eurl.franckgaumont/'}>
             <RiInstagramLine size={20}/>

@@ -16,43 +16,43 @@ import React from 'react';
 export const Partners = () => {
   return (
     <div
-      className={'w-full p-2 bg-white md:rounded-xl absolute bottom-0 translate-y-1/2 left-0 shadow-lg flex flex-col md:flex-row justify-around overflow-hidden'}>
+      className={'w-full p-2 bg-white md:rounded-xl absolute -bottom-10 translate-y-1/2 left-0 shadow-lg flex flex-col md:flex-row justify-around overflow-hidden'}>
       <ul className={'items-start flex gap-5 justify-center animate-infinite-scroll'}>
-        <li className={'w-1/5 flex-shrink-0'}>
-          <Image height={100} width={100} src={thermorLogo} alt={'logo partenaire thermor'}/>
+        <li className={'w-1/4 flex-shrink-0'}>
+          <Image height={150} width={150} src={thermorLogo} alt={'logo partenaire thermor'}/>
         </li>
-        <li className={'w-1/5 flex-shrink-0'}>
-          <Image height={100} width={100} src={axorLogo} alt={'logo partenaire axor'}/>
+        <li className={'w-1/4 flex-shrink-0'}>
+          <Image height={150} width={150} src={axorLogo} alt={'logo partenaire axor'}/>
         </li>
-        <li className={'w-1/5 flex-shrink-0'}>
-          <Image height={100} width={100} src={aupinelLogo} alt={'logo partenaire aupinel'}/>
+        <li className={'w-1/4 flex-shrink-0'}>
+          <Image height={150} width={150} src={aupinelLogo} alt={'logo partenaire aupinel'}/>
         </li>
-        <li className={'w-1/5 flex-shrink-0'}>
-          <Image height={100} width={100} src={atlanticLogo} alt={'logo partenaire atlantic'}/>
+        <li className={'w-1/4 flex-shrink-0'}>
+          <Image height={150} width={150} src={atlanticLogo} alt={'logo partenaire atlantic'}/>
         </li>
-        <li className={'w-1/5 flex-shrink-0'}>
-          <Image height={100} width={100} src={schluterLogo} alt={'logo partenaire schluter'}/>
+        <li className={'w-1/4 flex-shrink-0'}>
+          <Image height={150} width={150} src={schluterLogo} alt={'logo partenaire schluter'}/>
         </li>
-        <li className={'w-1/5 flex-shrink-0'}>
-          <Image height={100} width={100} src={pointpLogo} alt={'logo partenaire pointp'}/>
+        <li className={'w-1/4 flex-shrink-0'}>
+          <Image height={150} width={150} src={pointpLogo} alt={'logo partenaire pointp'}/>
         </li>
-        <li className={'w-1/5 flex-shrink-0'}>
-          <Image height={100} width={100} src={cedeoShowroomLogo} alt={'logo partenaire cedeo showroom'}/>
+        <li className={'w-1/4 flex-shrink-0'}>
+          <Image height={150} width={150} src={cedeoShowroomLogo} alt={'logo partenaire cedeo showroom'}/>
         </li>
-        <li className={'w-1/5 flex-shrink-0'}>
-          <Image height={100} width={100} src={cedeoLogo} alt={'logo partenaire cedeo'}/>
+        <li className={'w-1/4 flex-shrink-0'}>
+          <Image height={150} width={150} src={cedeoLogo} alt={'logo partenaire cedeo'}/>
         </li>
-        <li className={'w-1/5 flex-shrink-0'}>
-          <Image height={100} width={100} src={delplastLogo} alt={'logo partenaire delplast'}/>
+        <li className={'w-1/4 flex-shrink-0'}>
+          <Image height={150} width={150} src={delplastLogo} alt={'logo partenaire delplast'}/>
         </li>
-        <li className={'w-1/5 flex-shrink-0'}>
-          <Image height={100} width={100} src={geberitLogo} alt={'logo partenaire geberit'}/>
+        <li className={'w-1/4 flex-shrink-0'}>
+          <Image height={150} width={150} src={geberitLogo} alt={'logo partenaire geberit'}/>
         </li>
-        <li className={'w-1/5 flex-shrink-0'}>
-          <Image height={100} width={100} src={groheLogo} alt={'logo partenaire grohe'}/>
+        <li className={'w-1/4 flex-shrink-0'}>
+          <Image height={150} width={150} src={groheLogo} alt={'logo partenaire grohe'}/>
         </li>
-        <li className={'w-1/5 flex-shrink-0'}>
-          <Image height={100} width={100} src={hansgroheLogo} alt={'logo partenaire hansgrohe'}/>
+        <li className={'w-1/4 flex-shrink-0'}>
+          <Image height={150} width={150} src={hansgroheLogo} alt={'logo partenaire hansgrohe'}/>
         </li>
       </ul>
     </div>

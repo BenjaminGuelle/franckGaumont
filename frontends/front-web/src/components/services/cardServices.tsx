@@ -5,7 +5,6 @@ import repair from '@/public/images/repair.png';
 import { Typography } from '@/components/ui/typography';
 import Link from 'next/link';
 import { RiAddFill } from 'react-icons/ri';
-import { ActionLink } from '@/components/ui/actionLink';
 
 interface Props {
   services: ServicesModel;
@@ -38,22 +37,24 @@ export const CardServices = ({ services }: Props) => {
 
   return (
     <article
-      className={'mt-10 px-5 md:px-10 py-8 md:py-10 min-h-72 md:min-h-80 w-full md:max-w-72 rounded-tr-[40px] rounded-bl-[40px] shadow-[0_25px_50px_rgba(0,0,0,0.25)] serviceCard'}>
-      <Link href={'/services'} className={'min-h-72 md:min-h-80 flex flex-col justify-between'}>
-        <div className={'flex md:flex-col'}>
-          <div className={imageStyles}>
-            <Image src={icon} alt={alt} className={'object-contain w-full'}/>
+      className={'bg-white p-10 rounded-tr-[40px] rounded-bl-[40px] shadow-[0_25px_50px_rgba(0,0,0,0.25)] serviceCard group'}>
+      <Link href={'/services'} className={'flex min-h-[250px] md:min-h-[250px] lg:min-h-[350px] flex-col justify-between'}>
+        <div>
+          <div className={'flex md:flex-col'}>
+            <div className={imageStyles}>
+              <Image src={icon} alt={alt} className={'object-contain w-full'}/>
+            </div>
+            <Typography comp={'div'} variant={'t-2'} weight={'semibold'}
+                        className={'relative pl-5 md:pl-0 md:py-4 serviceTitle'}>
+              <h2>{title}</h2>
+            </Typography>
           </div>
-          <Typography comp={'div'} variant={'t-2'} weight={'semibold'}
-                      className={'relative pl-5 md:pl-0 md:pt-5 pb-2 serviceTitle'}>
-            <h2>{title}</h2>
+          <Typography className={'leading-6 py-5 md:py-10'}>
+            {shortDescription}
           </Typography>
         </div>
-        <Typography className={'leading-6 md:py-10'}>
-          {shortDescription}
-        </Typography>
         <Typography comp={'div'} className={'inline-flex gap-2'}>
-          <p className={'text-sm font-semibold'}>Découvrir</p>
+          <p className={'text-md md:text-base font-semibold'}>Découvrir</p>
           <div className={'rounded-full bg-accent text-primary p-2'}>
             <RiAddFill/>
           </div>

@@ -25,7 +25,7 @@ export const ShortNews = ({ publications }: Props) => {
 
       <div className={'flex min-h-[350px] w-full justify-center py-10 items-center'}>
         <Carousel className="w-full">
-          <CarouselContent className={'gap-x-0'}>
+          <CarouselContent className={'md:px-20'}>
             {publications.map((news) => {
               return (
                 <CarouselItem key={news.uid} className={'md:basis-1/2 lg:basis-1/3'}>

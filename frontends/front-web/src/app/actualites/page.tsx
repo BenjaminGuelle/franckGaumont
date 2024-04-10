@@ -19,7 +19,7 @@ export default async function News() {
   return (
     <>
       <Container className={'pt-14 md:pt-20'}>
-        <TitleSection title={'Découvrez les dernières réalisations'} label={'Actualités'} comp={'h1'} classNameIcon={'hidden md:block'}/>
+        <TitleSection title={'Découvrez les dernières réalisations'} label={'Actualités'} comp={'h1'}/>
         <SubtitleSection
           text={'Explorez les différentes réalisations et visualisez l’évolution progressive des chantiers. ' +
             'Découvrez des exemples de chantiers réussis, témoignant de ma passion, de matériaux de qualité et de mon savoir-faire en action.'}
@@ -32,7 +32,7 @@ export default async function News() {
         <Typography variant={'t-3'} theme={'white'} weight={'light'} className={'text-center lg:text-left'}>
           Vous avez un projet <span className={'font-extrabold'}>d’installation</span> ou de <span className={'font-extrabold'}>rénovation</span> ?
         </Typography>
-        <div className={'flex flex-col space-y-3 pt-5 md:flex-row md:space-y-0 md:gap-x-5'}>
+        <div className={'flex flex-col items-center justify-center lg:justify-normal space-y-3 pt-5 md:flex-row md:space-y-0 md:gap-x-5'}>
           <ButtonLink path={'/contact'}>Contactez - moi</ButtonLink>
           <ButtonLink variant={'outline'} path={'https://www.instagram.com/eurl.franckgaumont/'}>
             <RiInstagramLine size={20}/>

@@ -7,7 +7,7 @@ import { servicesData } from '@/data/services.data';
 export const ShortServices = () => {
   return (
     <section>
-      <Container className={'lg:pt-20 pb-40'}>
+      <Container className={'lg:pt-20 pb-20'}>
         <TitleSection title={'Les Services'}/>
         <SubtitleSection
           path={'/services'}
@@ -16,9 +16,12 @@ export const ShortServices = () => {
           ' en passant par l’agencement de salle de bain et de cuisine,\n' +
           ' je m\'engage à fournir des solutions complètes, rapides et durables.'}
         />
-        <div className={'pt-10 md:flex md:flex-wrap md:justify-center md:gap-10 lg:gap-20'}>
-          {servicesData.map((service: ServicesModel, index: number) => <CardServices key={index} services={service}/>)}
-        </div>
+        <ul className={'grid grid-cols-12 space-y-10 lg:space-y-0 md:gap-10 md:px-10 py-10 md:py-20'}>
+          {servicesData.map((service: ServicesModel, index: number) =>
+            <li key={index} className={'col-span-12 lg:col-span-4 hover:scale-105 transition ease-in-out'}>
+              <CardServices services={service}/>
+            </li>)}
+        </ul>
       </Container>
     </section>
   );

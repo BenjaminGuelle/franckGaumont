@@ -30,7 +30,7 @@ export default async function Presentation() {
 
         <div className={'col-span-12 md:col-span-6 flex flex-col justify-between'}>
           <div>
-            <TitleSection comp={'h1'} label={'Présentation'} title={'Franck Gaumont'} classNameIcon={'hidden md:block'}/>
+            <TitleSection comp={'h1'} label={'Présentation'} title={'Franck Gaumont'}/>
             <SubtitleSection
               text={'“Faites vos choix avec mes meilleurs conseils”'}
               className={'italic'}
@@ -97,7 +97,7 @@ export default async function Presentation() {
             </Typography>
           </div>
         </Typography>
-        <ButtonLink path={'/contact'} className={'absolute bottom-0 translate-y-1/2 left-1/2 -translate-x-1/2'}>Contactez - moi</ButtonLink>
+        <ButtonLink path={'/contact'} className={'absolute -bottom-10 translate-y-1/2 left-1/2 -translate-x-1/2'}>Contactez - moi</ButtonLink>
       </Divider>
       <ShortNews publications={publications}/>
       <div className={'relative flex items-center justify-center h-64 md:py-20'}>

@@ -16,9 +16,9 @@ export const Divider = ({children, hasPhone = true}: Props) => {
       backgroundPosition: 'left',
       backgroundSize: 'cover',
     }}
-    className={''}
+    className={'py-10'}
     >
-      <Container className={'relative'}>
+      <Container className={'relative xl:w-2/3'}>
         {children}
         {hasPhone &&
             <div className={'hidden lg:block absolute top-1/2 right-0 -translate-y-1/2'}>

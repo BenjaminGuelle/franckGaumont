@@ -8,10 +8,9 @@ import Image from 'next/image';
 import { EmptyImage } from '@/components/publications/emptyPicture';
 import { GiPositionMarker } from 'react-icons/gi';
 import { Typography } from '@/components/ui/typography';
-import { Button } from '@/components/ui/button';
-import { useRouter } from 'next/navigation';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import { PublicationPhotoModel } from '@/shared/models/publication/PublicationPhoto.model';
+import { ButtonLink } from '@/components/ui/buttonLink';
 
 interface Props {
   publication: PublicationModel;
@@ -19,7 +18,6 @@ interface Props {
 
 export const PublicationDetails = ({ publication }: Props) => {
   const { title, category, city, description, photos }: PublicationModel = publication;
-  const router = useRouter();
 
   const [preview, setPreview] = useState<string | null>((photos && photos.length > 0) ? photos[0].url : null);
 
@@ -91,9 +89,7 @@ export const PublicationDetails = ({ publication }: Props) => {
           </div>
         </aside>
         <div className={'col-span-12 md:col-span-6'}>
-          <Button onClick={() => router.push(`/actualites`)} variant={'default'} className={'px-6 py-3'}>
-            Retour aux actus
-          </Button>
+          <ButtonLink path={'/actualites'}>Retour aux actus</ButtonLink>
         </div>
         {/* ICI LES BOUTONS DE NAVIGATIONS | A AJOUTER PLUS TARD */}
         {/*<div className={'col-span-6 flex justify-end gap-4'}>*/}

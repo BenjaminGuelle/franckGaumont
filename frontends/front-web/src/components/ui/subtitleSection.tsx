@@ -11,7 +11,7 @@ interface Props {
 
 export const SubtitleSection: ({ text, className }: Props) => JSX.Element = ({text, buttonText, path, className}: Props) => {
   return (
-    <div className={cn('flex justify-between pt-20 md:pt-10 lg:pt-5', className)}>
+    <div className={cn('flex justify-between pt-0 md:pt-10 lg:pt-5', className)}>
       <Typography className={'lg:border-l lg:pl-5 lg:pr-20 flex-1'}>
         {text}
       </Typography>

@@ -22,13 +22,13 @@ export const ContactLink = ({ contactLink, className, variant = 'white', weight 
   let variantPhoneStyles = '';
   switch (variant) {
     case 'white':
-      variantIconStyles = 'text-white';
+      variantIconStyles = 'text-white group-hover:text-grey-400';
       variantPhoneBox = 'bg-white';
       variantThemeStyles = 'white';
       variantPhoneStyles = 'text-primary';
       break;
     case 'black':
-      variantIconStyles = 'text-primary';
+      variantIconStyles = 'text-primary group-hover:text-primary/75';
       variantPhoneBox = 'bg-primary';
       variantThemeStyles = 'primary';
       variantPhoneStyles = 'text-white';
@@ -46,9 +46,9 @@ export const ContactLink = ({ contactLink, className, variant = 'white', weight 
       {
         contactLink === 'ADDRESS' &&
           <a href="https://www.google.com/maps/search/?api=1&query=Calvados" target={'_blank'}
-             className={cn('inline-flex items-center space-x-1', className)}>
+             className={cn('inline-flex items-center space-x-1 group', className)}>
               <RiMapPinLine className={variantIconStyles} size={20}/>
-              <Typography theme={variantThemeStyles} weight={weight} className={'uppercase'}>
+              <Typography theme={variantThemeStyles} weight={weight} className={cn('uppercase', variant === 'white' ? 'group-hover:text-grey-400' : 'group-hover:text-primary/75')}>
                   Calvados - Normandie
               </Typography>
           </a>
@@ -56,9 +56,9 @@ export const ContactLink = ({ contactLink, className, variant = 'white', weight 
       {
         contactLink === 'MAIL' &&
           <a href={'mailTo:contact@franckgaumont.fr'}
-             className={cn('inline-flex items-center space-x-1', className)}>
+             className={cn('inline-flex items-center space-x-1 group', className)}>
               <RiMailSendLine className={variantIconStyles} size={20}/>
-              <Typography theme={variantThemeStyles} weight={weight}>
+              <Typography theme={variantThemeStyles} weight={weight} className={cn('group-hover:underline', variant === 'white' ? 'group-hover:text-grey-400' : 'group-hover:text-primary/75')}>
                   contact@franckgaumont.fr
               </Typography>
           </a>
@@ -66,11 +66,11 @@ export const ContactLink = ({ contactLink, className, variant = 'white', weight 
       {
         contactLink === 'PHONE' &&
           <a href={'tel:0783729832'}
-             className={cn('inline-flex items-center space-x-1', className)}>
+             className={cn('inline-flex items-center space-x-1 group', className)}>
               <div className={cn('rounded-full w-7 h-7 flex justify-center items-center p-1', variantPhoneBox)}>
                   <RiPhoneFill className={variantPhoneStyles} size={20}/>
               </div>
-              <Typography weight={weight} theme={variantThemeStyles} className={'md:text-xl'}>
+              <Typography weight={weight} theme={variantThemeStyles} className={cn('md:text-xl', variant === 'accent' ? 'group-hover:text-grey-400' : 'group-hover:text-primary/75')}>
                   07 83 72 98 32
               </Typography>
           </a>
@@ -79,14 +79,14 @@ export const ContactLink = ({ contactLink, className, variant = 'white', weight 
         contactLink === 'FB' &&
           <a href="https://www.facebook.com/profile.php?id=100087400862064" target="_blank"
              className={cn('inline-flex', className)}>
-              <RiFacebookCircleFill className={variantIconStyles} size={20}/>
+              <RiFacebookCircleFill className={variantIconStyles} size={25}/>
           </a>
       }
       {
         contactLink === 'INST' &&
           <a href="https://www.instagram.com/eurl.franckgaumont/" target="_blank"
              className={cn('inline-flex', className)}>
-              <RiInstagramLine className={variantIconStyles} size={20}/>
+              <RiInstagramLine className={variantIconStyles} size={25}/>
           </a>
       }
     </>
