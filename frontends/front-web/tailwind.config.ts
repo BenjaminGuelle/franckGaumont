@@ -22,7 +22,7 @@ const config = {
       '2xl': '1.5rem',
       '3xl': '1.75rem',
       '4xl': '2.1875rem',
-      '5xl': '2.875rem',
+      '5xl': '3.875rem',
     },
     colors: {
       primary: '#000000',

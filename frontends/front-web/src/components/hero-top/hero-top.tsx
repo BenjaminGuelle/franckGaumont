@@ -17,7 +17,7 @@ export const HeroTop = () => {
     >
       <Container className={'relative flex items-center lg:h-[590px]'} >
         <div className={'space-y-5 md:space-y-10'}>
-          <Typography variant={'t-5'} comp={'h1'} weight={'extrabold'} theme={'white'} className={'md:max-w-xl lg:max-w-3xl flex flex-wrap gap-2 md:gap-4 xl:gap-6 capitalize'}>
+          <Typography variant={'t-5'} comp={'h1'} weight={'extrabold'} theme={'white'} className={'md:max-w-xl lg:max-w-4xl flex flex-wrap gap-2 md:gap-4 xl:gap-8 capitalize'}>
             <span>Plomberie,</span>
             <span>aménagement</span>
             <span>& dépannage</span>

@@ -12,7 +12,7 @@ export const Navigation = () => {
       <ActiveLink href={'/presentation'} pathname={pathname}>Présentation</ActiveLink>
       <ActiveLink href={'/services'} pathname={pathname}>Services</ActiveLink>
       <ActiveLink href={'/actualites'} pathname={pathname}>Actualités</ActiveLink>
-      <ActiveLink href={'/contact'} pathname={pathname} className={'bg-white text-primary px-5'}>Contact</ActiveLink>
+      <ActiveLink href={'/contact'} pathname={pathname} className={'bg-white text-primary px-5 hover:text-primary/75'}>Contact</ActiveLink>
     </div>
   )
 }
