@@ -21,7 +21,7 @@ export const Footer = () => {
             <Logo/>
           </div>
           <div>
-            <Typography weight={'semibold'} theme={'white'}>EIRL Franck Gaumont</Typography>
+            <Typography weight={'semibold'} theme={'white'}>EURL Franck Gaumont</Typography>
             <a href="https://www.google.com/maps/search/?api=1&query=Calvados" target={'_blank'}>
               <Typography weight={'medium'} theme={'white'} className={'opacity-50'}>Calvados - Normandie</Typography>
             </a>
