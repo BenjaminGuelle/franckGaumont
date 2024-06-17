@@ -6,4 +6,5 @@ export interface PublicationPhotoModel {
   name: string;
   creationDate: Timestamp | number,
   updatedDate?: Timestamp | number,
+  isHero: boolean;
 }

@@ -12,6 +12,7 @@ interface Props {
 }
 
 export const ShortNews = ({ publications }: Props) => {
+
   return (
     <Container className={'lg:pt-20 pb-20'}>
       <TitleSection title={'Les Réalisations'}/>

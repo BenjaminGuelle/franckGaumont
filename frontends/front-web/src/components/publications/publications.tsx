@@ -35,8 +35,9 @@ export const Publications = ({ publications, lastVisible, lastPriority }: Props)
   }, [lastPublication, lastPublicationPriority]);
 
   useEffect(() => {
+    const sortedPublications = publicationsActive.sort((a, b) => (b.priority ? 1 : 0) - (a.priority ? 1 : 0));
     setPublicationsFiltered(
-      cat ? publicationsActive.filter((pub) => pub.category === cat) : publicationsActive,
+      cat ? sortedPublications.filter((pub) => pub.category === cat) : sortedPublications,
     );
   }, [cat, publicationsActive]);
 

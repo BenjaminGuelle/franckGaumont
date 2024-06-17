@@ -25,7 +25,7 @@ export async function getPublicationsWithPhotos(withLimit?: number): Promise<Pub
   if (withLimit) {
     publicationsQuery =
       query(collectionSnapshot,
-        where('isOnline', '==', true),
+        where('priority', '==', true),
         orderBy('creationDate', 'desc'),
         limit(withLimit),
       );

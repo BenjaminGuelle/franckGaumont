@@ -16,18 +16,22 @@ interface Props {
 export const PublicationCard = ({publication, comp: Component = 'li', }: Props) => {
   const { title, city, description, uid, category } = publication;
 
-  const getFirstPicture = (pub: PublicationModel) => {
-    return (pub.photos && pub.photos.length > 0)
-      ? <Image priority={true} fill={true} src={pub.photos[0].url} alt={'photo de la publication'}
-               className={'object-cover hover:scale-105 transition ease-in-out'}/>
-      : <EmptyImage/>;
-  };
+  const getPhoto = () => {
+    const { photos } = publication;
+    if (!photos || photos?.length === 0) {
+      return (<EmptyImage/>);
+    }
+    const photo = photos.find((photo) => photo.isHero)?.url || photos[0].url;
+
+    return (<Image priority={true} fill={true} src={photo} alt={'photo de la publication'}
+                  className={'object-cover hover:scale-105 transition ease-in-out'}/>)
+  }
 
   return (
     <Component className={'col-span-12 md:col-span-4 cursor-pointer py-2 group'}>
       <Link href={`/actualites/${uid}`}>
         <figure className={'w-full aspect-square relative overflow-hidden'}>
-          {getFirstPicture(publication)}
+          {getPhoto()}
           <div className={'hidden md:block absolute top-5 left-0 bg-grey-400/75 py-2 px-4'}>{category === 'PLUMBING' ? 'Plomberie' : 'Agencement'}</div>
           <div className={'md:hidden absolute bottom-0 left-0 right-0 p-2 bg-primary bg-opacity-50'}>
             <h3 className="text-sm font-bold text-white">{title}</h3>

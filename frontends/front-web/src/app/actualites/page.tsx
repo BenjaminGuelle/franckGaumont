@@ -14,7 +14,7 @@ import { RiInstagramLine } from 'react-icons/ri';
 import { GetPublicationsWithPaginationResponse } from '@/shared/responses/GetPublicationsWithPagination.response';
 
 export default async function News() {
-  const {data, lastVisible, lastPriority}: GetPublicationsWithPaginationResponse = await getPublicationsWithPhotosWithPagination({perPage: 6});
+  const {data, lastVisible, lastPriority}: GetPublicationsWithPaginationResponse = await getPublicationsWithPhotosWithPagination({perPage: 24});
 
   return (
     <>
