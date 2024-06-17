@@ -7,6 +7,7 @@ import { deletePublicationFile, updatePublication, uploadFiles } from '@/service
 import { UpdatePublicationRequest } from '@/shared/requests/publications/UpdatePublication.request';
 import { RxUpdate } from 'react-icons/rx';
 import { PhotoCard } from '@/components/modules/publications/photo-card';
+import { Switch } from '@/components/ui/switch';
 
 interface Props {
   publication: PublicationModel;
@@ -19,6 +20,7 @@ export interface ItemFile {
   uid?: string;
   preview?: string;
   url?: string;
+  isHero?: boolean;
 }
 
 export const PublicationPictures = ({ publication, photos = [], onPhotoUpdate }: Props) => {
@@ -28,7 +30,7 @@ export const PublicationPictures = ({ publication, photos = [], onPhotoUpdate }:
 
   const [deleteFileLoading, setDeleteFileLoading] = useState<string | null>(null);
 
-  const [data, _] = useState<PublicationPhotoModel[]>(photos);
+  const [data, setData] = useState<PublicationPhotoModel[]>(photos);
   const [itemFile, setItemFile] = useState<ItemFile[]>([]);
 
   const handleFileSelect = (index: number) => async (file: File) => {
@@ -47,25 +49,42 @@ export const PublicationPictures = ({ publication, photos = [], onPhotoUpdate }:
     await deletePublicationFile(uid, fileUid);
     onPhotoUpdate();
     setDeleteFileLoading(null);
-  }, [uid, onPhotoUpdate])
+  }, [uid, onPhotoUpdate]);
 
   const handleImageUpload = async () => {
     setIsLoading(true);
+    const imagesUploaded: Partial<PublicationPhotoModel>[] = await updateNewFilePicture();
+    const itemsUpdated: PublicationPhotoModel[] = data.filter((item) => item && item.uid);
+
+    const request: UpdatePublicationRequest = {
+      publicationUid: uid,
+      photos: [...itemsUpdated, ...imagesUploaded],
+    };
+
+    await updatePublication(request);
+    onPhotoUpdate();
+
+    setIsLoading(false);
+  };
+
+  const updateNewFilePicture: () => Promise<Partial<PublicationPhotoModel>[] | any[]> = async () => {
     const validItems: ItemFile[] = itemFile.filter((item) => item && item.file);
     if (validItems.length > 0) {
-      const imagesToUpload: filesToUpload[] = validItems.map((item) => ({uid: item.uid, file: item.file} as filesToUpload));
-      const imagesUploaded: Partial<PublicationPhotoModel>[] = await uploadFiles(uid, imagesToUpload);
-
-      const request: UpdatePublicationRequest = {
-        publicationUid: uid,
-        photos: imagesUploaded,
-      }
-
-      await updatePublication(request);
-      onPhotoUpdate();
-
+      const imagesToUpload: filesToUpload[] = validItems.map((item) => ({
+        uid: item.uid, file: item.file,
+      } as filesToUpload));
+      return await uploadFiles(uid, imagesToUpload);
     }
-    setIsLoading(false);
+    else return [];
+  }
+
+  const handleHeroChange = (index: number) => (isChecked: boolean) => {
+    setData(current =>
+      current.map((item, idx) => ({
+        ...item,
+        isHero: idx === index ? isChecked : false
+      }))
+    );
   };
 
   const refresh: () => void = useCallback(() => {
@@ -74,12 +93,13 @@ export const PublicationPictures = ({ publication, photos = [], onPhotoUpdate }:
       file: undefined,
       preview: undefined,
       url: data[index]?.url,
+      isHero: data[index]?.isHero,
     }));
     setItemFile(initialItemFiles);
   }, [data]);
 
   useEffect(() => {
-    refresh()
+    refresh();
   }, [refresh]);
 
   return (
@@ -95,13 +115,23 @@ export const PublicationPictures = ({ publication, photos = [], onPhotoUpdate }:
       </div>
       <div className={'flex flex-wrap gap-4 justify-center md:justify-normal'}>
         {itemFile.map((item, index) =>
-          (<PhotoCard
-            key={index}
-            item={item}
-            onFileSelect={handleFileSelect(index)}
-            onDelete={(fileId: string) => handleDeleteFile(fileId)}
-            isLoading={deleteFileLoading === item.uid}
-          />))
+          (<aside key={index}>
+              <PhotoCard
+                item={item}
+                onFileSelect={handleFileSelect(index)}
+                onDelete={(fileId: string) => handleDeleteFile(fileId)}
+                isLoading={deleteFileLoading === item.uid}
+              />
+              <div className="flex gap-2 justify-center py-3">
+                <Switch
+                  className={item.url ? 'block' : 'hidden'}
+                  checked={item.isHero ?? false}
+                  onCheckedChange={handleHeroChange(index)}
+                />
+                <p className={item.isHero ? 'visible' : 'invisible'}>Première</p>
+              </div>
+            </aside>
+          ))
         }
       </div>
 

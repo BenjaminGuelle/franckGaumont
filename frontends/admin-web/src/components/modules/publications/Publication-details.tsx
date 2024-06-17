@@ -12,7 +12,6 @@ import { Container } from '@/components/layout/Container';
 import { PublicationPictures } from '@/components/modules/publications/Publication-pictures';
 import { FirebaseWrapperClient } from '@/services/firebase.service';
 import { Spin } from '@/components/spinner/spin';
-import { router } from 'next/client';
 import { useRouter } from 'next/navigation';
 
 interface Props {
